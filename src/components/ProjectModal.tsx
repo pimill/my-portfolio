@@ -15,17 +15,26 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   useEffect(() => {
     if (project) {
       const scrollY = window.scrollY;
+      // 鎖定 body 的滾動
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
+      
+      // 同步鎖定 html 根節點，完美消除外層殘留的滾動條
+      document.documentElement.style.overflow = 'hidden';
     }
     return () => {
       const scrollY = document.body.style.top;
+      // 還原 body 樣式
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
       document.body.style.overflow = '';
+      
+      // 還原 html 樣式
+      document.documentElement.style.overflow = '';
+      
       window.scrollTo(0, parseInt(scrollY || '0') * -1);
     };
   }, [project]);
@@ -92,41 +101,3 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
                       設計過程
                       <div className="w-8 h-px bg-brand-red" />
-                    </h3>
-                    <ul className="space-y-4">
-                      {project.process.map((step, idx) => (
-                        <li key={idx} className="flex gap-4 text-lg">
-                          <span className="text-brand-red font-mono font-bold">{(idx + 1).toString().padStart(2, '0')}</span>
-                          {step}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
-                      最終成果
-                      <div className="w-8 h-px bg-brand-blue" />
-                    </h3>
-                    <ul className="space-y-4">
-                      {project.outcomes.map((outcome, idx) => (
-                        <li key={idx} className="flex gap-4 text-lg items-center">
-                          <div className="w-2 h-2 rounded-full bg-brand-blue" />
-                          {outcome}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference hidden md:block" onClick={() => window.scrollTo(0, window.innerHeight)}>
-              <MushroomIcon className="w-6 h-6" />
-            </div>
-
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};
