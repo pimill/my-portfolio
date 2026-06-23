@@ -128,72 +128,99 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                   </div>
                 </div>
 
+                {/* ── 聯絡資訊區塊（重新編排） ── */}
                 <div className="mt-24 pt-16 border-t border-brand-light-gray/60 relative z-20">
                   <h3 className="font-display text-2xl font-bold mb-10 flex items-center gap-3">
                     聯絡資訊
                     <div className="w-8 h-px bg-brand-red" />
                   </h3>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg">
-                    <div className="space-y-6">
-                      <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60">Social Media</span>
-                      <div className="flex flex-col gap-4">
-                        <a 
-                          href="https://www.instagram.com/r_yobiii_618/" 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          onClick={(e) => e.stopPropagation()}
-                          className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
-                        >
-                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Instagram</span>
-                          <span className="text-sm opacity-50">@r_yobiii_618</span>
-                        </a>
-                        <a 
-                          href="https://www.behance.net/32a0d06b" 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          onClick={(e) => e.stopPropagation()}
-                          className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
-                        >
-                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Behance</span>
-                          <span className="text-sm opacity-50">作品集</span>
-                        </a>
-                      </div>
-                    </div>
 
-                    <div className="space-y-6">
-                      <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60">Contact Details</span>
-                      <div className="flex flex-col gap-4">
-                        <a 
-                          href="mailto:fpizzayz2@gmail.com" 
-                          onClick={(e) => e.stopPropagation()}
-                          className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
-                        >
-                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Email</span>
-                          <span className="text-sm opacity-50">fpizzayz2@gmail.com</span>
-                        </a>
-                        <a 
-                          href="tel:0925367291" 
-                          onClick={(e) => e.stopPropagation()}
-                          className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
-                        >
-                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">電話</span>
-                          <span className="text-sm opacity-50">0925-367-291</span>
-                        </a>
-                        <a 
-                          href="https://line.me/ti/p/~514687" 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          onClick={(e) => e.stopPropagation()}
-                          className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
-                        >
-                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">LINE ID</span>
-                          <span className="text-sm opacity-50">514687</span>
-                        </a>
-                      </div>
+                  {/* Social Media — 膠囊按鈕列 */}
+                  <div className="mb-10">
+                    <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-5">
+                      Social Media
+                    </span>
+                    <div className="flex flex-wrap gap-3">
+                      <a
+                        href="https://www.instagram.com/r_yobiii_618/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="relative z-20 pointer-events-auto group inline-flex items-center gap-2 border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-5 py-2.5 transition-all cursor-pointer"
+                      >
+                        <span className="font-medium text-base">Instagram</span>
+                        <span className="text-sm opacity-40 group-hover:opacity-70 transition-opacity">
+                          @r_yobiii_618
+                        </span>
+                      </a>
+                      <a
+                        href="https://www.behance.net/32a0d06b"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="relative z-20 pointer-events-auto group inline-flex items-center gap-2 border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-5 py-2.5 transition-all cursor-pointer"
+                      >
+                        <span className="font-medium text-base">Behance</span>
+                        <span className="text-sm opacity-40 group-hover:opacity-70 transition-opacity">
+                          作品集
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Contact Details — 卡片格列 */}
+                  <div>
+                    <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-5">
+                      Contact Details
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      {/* Email */}
+                      <a
+                        href="mailto:fpizzayz2@gmail.com"
+                        onClick={(e) => e.stopPropagation()}
+                        className="relative z-20 pointer-events-auto group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer"
+                      >
+                        <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
+                          Email
+                        </span>
+                        <span className="font-medium text-sm group-hover:text-brand-red transition-colors break-all">
+                          fpizzayz2@gmail.com
+                        </span>
+                      </a>
+
+                      {/* 電話 */}
+                      <a
+                        href="tel:0925367291"
+                        onClick={(e) => e.stopPropagation()}
+                        className="relative z-20 pointer-events-auto group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer"
+                      >
+                        <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
+                          電話
+                        </span>
+                        <span className="font-medium text-sm group-hover:text-brand-red transition-colors">
+                          0925-367-291
+                        </span>
+                      </a>
+
+                      {/* LINE */}
+                      <a
+                        href="https://line.me/ti/p/~514687"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="relative z-20 pointer-events-auto group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer"
+                      >
+                        <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
+                          LINE ID
+                        </span>
+                        <span className="font-medium text-sm group-hover:text-brand-red transition-colors">
+                          514687
+                        </span>
+                      </a>
                     </div>
                   </div>
                 </div>
+                {/* ── 聯絡資訊區塊結束 ── */}
 
               </div>
             </div>
