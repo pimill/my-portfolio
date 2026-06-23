@@ -1,4 +1,3 @@
-cat > /mnt/user-data/outputs/ProjectModal.tsx << 'EOF'
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '../types';
 import { useState, useEffect, useRef } from 'react';
@@ -17,7 +16,7 @@ const openNewTab = (url: string) => {
 
 export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   const [isExpanding, setIsExpanding] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);   // ← 用來控制 Modal 內的捲動
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (project) {
@@ -157,11 +156,10 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                       Social Media
                     </span>
                     <div className="flex flex-wrap gap-3">
-                      {/* Instagram */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          openNewTab('https://www.instagram.com/r_yobiii_618/');
+                          openNewTab('https://www.instagram.com/r_yobiii_618/' );
                         }}
                         className="group inline-flex items-center gap-2 border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-5 py-2.5 transition-all cursor-pointer"
                       >
@@ -171,11 +169,10 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         </span>
                       </button>
 
-                      {/* Behance */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          openNewTab('https://www.behance.net/32a0d06b');
+                          openNewTab('https://www.behance.net/32a0d06b' );
                         }}
                         className="group inline-flex items-center gap-2 border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-5 py-2.5 transition-all cursor-pointer"
                       >
@@ -193,10 +190,8 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                       Contact Details
                     </span>
 
-                    {/* 手機直排 / sm 以上三欄 */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-
-                      {/* Email — 點擊開啟郵件 App */}
+                      {/* Email */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -212,7 +207,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         </span>
                       </button>
 
-                      {/* 電話 — 點擊撥號 */}
+                      {/* 電話 */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -228,11 +223,11 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         </span>
                       </button>
 
-                      {/* LINE — 點擊開新分頁加好友 */}
+                      {/* LINE ID */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          openNewTab('https://line.me/ti/p/~514687');
+                          openNewTab('https://line.me/ti/p/~514687' );
                         }}
                         className="group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer text-left"
                       >
@@ -243,21 +238,17 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                           514687
                         </span>
                       </button>
-
                     </div>
                   </div>
                 </div>
-                {/* ════ 聯絡資訊結束 ════ */}
-
               </div>
             </div>
 
-            {/* 往下捲動提示 — 手機 & 桌機都顯示 */}
+            {/* 往下捲動提示 */}
             <div
               className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference"
               onClick={(e) => {
                 e.stopPropagation();
-                // 捲動 Modal 內部，而不是 window
                 modalRef.current?.scrollTo({
                   top: window.innerHeight,
                   behavior: 'smooth',
@@ -273,4 +264,3 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
     </AnimatePresence>
   );
 };
-EOF
