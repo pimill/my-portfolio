@@ -101,3 +101,108 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
                       設計過程
                       <div className="w-8 h-px bg-brand-red" />
+                    </h3>
+                    <ul className="space-y-4">
+                      {project.process.map((step, idx) => (
+                        <li key={idx} className="flex gap-4 text-lg">
+                          <span className="text-brand-red font-mono font-bold">{(idx + 1).toString().padStart(2, '0')}</span>
+                          {step}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+                      最終成果
+                      <div className="w-8 h-px bg-brand-blue" />
+                    </h3>
+                    <ul className="space-y-4">
+                      {project.outcomes.map((outcome, idx) => (
+                        <li key={idx} className="flex gap-4 text-lg items-center">
+                          <div className="w-2 h-2 rounded-full bg-brand-blue" />
+                          {outcome}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* ==================== 新增的聯絡資訊區塊 ==================== */}
+                <div className="mt-24 pt-16 border-t border-brand-light-gray/60">
+                  <h3 className="font-display text-2xl font-bold mb-10 flex items-center gap-3">
+                    聯絡資訊
+                    <div className="w-8 h-px bg-brand-red" />
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg">
+                    {/* 左側：社群平台 */}
+                    <div className="space-y-6">
+                      <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60">Social Media</span>
+                      <div className="flex flex-col gap-4">
+                        <a 
+                          href="https://www.instagram.com/r_yobiii_618/" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit"
+                        >
+                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Instagram</span>
+                          <span className="text-sm opacity-50">@r_yobiii_618</span>
+                        </a>
+                        <a 
+                          href="https://www.behance.net/32a0d06b" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit"
+                        >
+                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Behance</span>
+                          <span className="text-sm opacity-50">作品集</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* 右側：通訊聯絡 */}
+                    <div className="space-y-6">
+                      <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60">Contact Details</span>
+                      <div className="flex flex-col gap-4">
+                        <a 
+                          href="mailto:fpizzayz2@gmail.com" 
+                          className="group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit"
+                        >
+                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Email</span>
+                          <span className="text-sm opacity-50">fpizzayz2@gmail.com</span>
+                        </a>
+                        <a 
+                          href="tel:0925367291" 
+                          className="group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit"
+                        >
+                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">電話</span>
+                          <span className="text-sm opacity-50">0925-367-291</span>
+                        </a>
+                        <a 
+                          href="https://line.me/ti/p/~514687" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit"
+                        >
+                          <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">LINE ID</span>
+                          <span className="text-sm opacity-50">514687</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* ========================================================== */}
+
+              </div>
+            </div>
+            
+            <div className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference hidden md:block" onClick={() => window.scrollTo(0, window.innerHeight)}>
+              <MushroomIcon className="w-6 h-6" />
+            </div>
+
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
