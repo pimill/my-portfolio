@@ -15,25 +15,21 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   useEffect(() => {
     if (project) {
       const scrollY = window.scrollY;
-      // 鎖定 body 的位置與滾動
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
       
-      // 同步鎖定 html 根節點，防止外層出現殘留滾動條
       document.documentElement.style.overflow = 'hidden';
     }
     
     return () => {
       const scrollY = document.body.style.top;
-      // 還原 body 樣式
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
       document.body.style.overflow = '';
       
-      // 還原 html 樣式
       document.documentElement.style.overflow = '';
       
       window.scrollTo(0, parseInt(scrollY || '0') * -1);
@@ -64,9 +60,13 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             exit={{ opacity: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
             className="fixed inset-0 z-50 bg-white overflow-y-auto pointer-events-auto"
+            onClick={(e) => e.stopPropagation()}
           >
             <button 
-              onClick={onClose}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
               className="fixed top-6 right-6 md:top-10 md:right-10 z-50 p-4 bg-brand-light-gray hover:bg-brand-red hover:text-white rounded-full transition-colors group cursor-pointer"
             >
               <X className="w-6 h-6" />
@@ -128,7 +128,6 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                   </div>
                 </div>
 
-                {/* ==================== 聯絡資訊區塊 (已加強圖層與點擊感應) ==================== */}
                 <div className="mt-24 pt-16 border-t border-brand-light-gray/60 relative z-20">
                   <h3 className="font-display text-2xl font-bold mb-10 flex items-center gap-3">
                     聯絡資訊
@@ -136,7 +135,6 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg">
-                    {/* 左側：社群平台 */}
                     <div className="space-y-6">
                       <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60">Social Media</span>
                       <div className="flex flex-col gap-4">
@@ -144,6 +142,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                           href="https://www.instagram.com/r_yobiii_618/" 
                           target="_blank" 
                           rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
                           className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
                         >
                           <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Instagram</span>
@@ -153,6 +152,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                           href="https://www.behance.net/32a0d06b" 
                           target="_blank" 
                           rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
                           className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
                         >
                           <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Behance</span>
@@ -161,12 +161,12 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                       </div>
                     </div>
 
-                    {/* 右側：通訊聯絡 */}
                     <div className="space-y-6">
                       <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60">Contact Details</span>
                       <div className="flex flex-col gap-4">
                         <a 
                           href="mailto:fpizzayz2@gmail.com" 
+                          onClick={(e) => e.stopPropagation()}
                           className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
                         >
                           <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">Email</span>
@@ -174,6 +174,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         </a>
                         <a 
                           href="tel:0925367291" 
+                          onClick={(e) => e.stopPropagation()}
                           className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
                         >
                           <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">電話</span>
@@ -183,6 +184,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                           href="https://line.me/ti/p/~514687" 
                           target="_blank" 
                           rel="noopener noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
                           className="relative z-20 cursor-pointer group inline-flex items-center gap-3 hover:text-brand-red transition-colors w-fit pointer-events-auto"
                         >
                           <span className="font-medium underline decoration-brand-light-gray group-hover:decoration-brand-red transition-colors">LINE ID</span>
@@ -192,12 +194,17 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     </div>
                   </div>
                 </div>
-                {/* ========================================================== */}
 
               </div>
             </div>
             
-            <div className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference hidden md:block" onClick={() => window.scrollTo(0, window.innerHeight)}>
+            <div 
+              className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference hidden md:block" 
+              onClick={(e) => {
+                e.stopPropagation();
+                window.scrollTo(0, window.innerHeight);
+              }}
+            >
               <MushroomIcon className="w-6 h-6" />
             </div>
 
