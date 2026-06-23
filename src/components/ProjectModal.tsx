@@ -234,7 +234,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             {/* 往下捲動提示 */}
             <div
               className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference"
-              onClick={(e ) => {
+              onClick={(e) => {
                 e.stopPropagation();
                 modalRef.current?.scrollTo({
                   top: window.innerHeight,
