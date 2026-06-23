@@ -4,7 +4,7 @@ import path from 'path';
 import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
-    base: '/個人作品及/',   // ← 加這一行
+    base: '/my-portfolio/',   //
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
