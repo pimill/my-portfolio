@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '../types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MushroomIcon } from './MushroomIcon';
 import { X } from 'lucide-react';
 
@@ -12,9 +12,15 @@ interface ProjectModalProps {
 export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
   const [isExpanding, setIsExpanding] = useState(false);
 
-  // When a project is clicked, we could run the mushroom expansion animation
-  // For simplicity, we trigger the transition when the modal opens
-  
+  useEffect(() => {
+    if (project) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [project]);
+
   if (!project) return null;
 
   return (
@@ -23,7 +29,6 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
         <motion.div 
           className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
         >
-          {/* Transition Mushroom */}
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 150 }}
@@ -106,7 +111,6 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               </div>
             </div>
             
-            {/* Scroll indicator for modal */}
             <div className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference hidden md:block" onClick={() => window.scrollTo(0, window.innerHeight)}>
               <MushroomIcon className="w-6 h-6" />
             </div>
