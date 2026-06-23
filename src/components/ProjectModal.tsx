@@ -9,13 +9,7 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-// ── 開新分頁跳轉（Instagram / Behance / LINE）
-const openNewTab = (url: string) => {
-  window.open(url, '_blank', 'noopener,noreferrer');
-};
-
 export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
-  const [isExpanding, setIsExpanding] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -156,31 +150,31 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                       Social Media
                     </span>
                     <div className="flex flex-wrap gap-3">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openNewTab('https://www.instagram.com/r_yobiii_618/' );
-                        }}
+                      {/* Instagram */}
+                      <a
+                        href="https://www.instagram.com/r_yobiii_618/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group inline-flex items-center gap-2 border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-5 py-2.5 transition-all cursor-pointer"
                       >
                         <span className="font-medium text-base">Instagram</span>
                         <span className="text-sm opacity-40 group-hover:opacity-70 transition-opacity">
                           @r_yobiii_618
                         </span>
-                      </button>
+                      </a>
 
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openNewTab('https://www.behance.net/32a0d06b' );
-                        }}
+                      {/* Behance */}
+                      <a
+                        href="https://www.behance.net/32a0d06b"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group inline-flex items-center gap-2 border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-5 py-2.5 transition-all cursor-pointer"
                       >
                         <span className="font-medium text-base">Behance</span>
                         <span className="text-sm opacity-40 group-hover:opacity-70 transition-opacity">
                           作品集
                         </span>
-                      </button>
+                      </a>
                     </div>
                   </div>
 
@@ -192,11 +186,8 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       {/* Email */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.location.href = 'mailto:fpizzayz2@gmail.com';
-                        }}
+                      <a
+                        href="mailto:fpizzayz2@gmail.com"
                         className="group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer text-left"
                       >
                         <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
@@ -205,14 +196,11 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         <span className="font-medium text-sm group-hover:text-brand-red transition-colors break-all">
                           fpizzayz2@gmail.com
                         </span>
-                      </button>
+                      </a>
 
                       {/* 電話 */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.location.href = 'tel:0925367291';
-                        }}
+                      <a
+                        href="tel:0925367291"
                         className="group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer text-left"
                       >
                         <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
@@ -221,14 +209,13 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         <span className="font-medium text-sm group-hover:text-brand-red transition-colors">
                           0925-367-291
                         </span>
-                      </button>
+                      </a>
 
                       {/* LINE ID */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openNewTab('https://line.me/ti/p/~514687' );
-                        }}
+                      <a
+                        href="https://line.me/ti/p/~514687"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer text-left"
                       >
                         <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
@@ -237,7 +224,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         <span className="font-medium text-sm group-hover:text-brand-red transition-colors">
                           514687
                         </span>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -247,7 +234,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             {/* 往下捲動提示 */}
             <div
               className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference"
-              onClick={(e) => {
+              onClick={(e ) => {
                 e.stopPropagation();
                 modalRef.current?.scrollTo({
                   top: window.innerHeight,
