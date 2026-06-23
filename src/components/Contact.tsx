@@ -4,9 +4,11 @@ import { ArrowUpRight } from 'lucide-react';
 
 export const Contact = () => {
   const links = [
-    { name: "Instagram", url: "#" },
-    { name: "Behance", url: "#" },
-    { name: "Email", url: "mailto:hello@example.com" }
+    { name: "Instagram", url: "https://www.instagram.com/r_yobiii_618/", external: true },
+    { name: "Behance", url: "https://www.behance.net/32a0d06b", external: true },
+    { name: "Email", url: "mailto:fpizzayz2@gmail.com", external: false },
+    { name: "電話", url: "tel:0925367291", external: false },
+    { name: "LINE ID", url: "https://line.me/ti/p/~514687", external: true },
   ];
 
   return (
@@ -24,18 +26,19 @@ export const Contact = () => {
               今天先這樣
             </h2>
           </motion.div>
-
           <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="flex flex-col md:flex-row gap-8 md:gap-16 items-center justify-center mt-12"
+            className="flex flex-wrap gap-6 md:gap-12 items-center justify-center mt-12"
           >
-            {links.map((link, idx) => (
+            {links.map((link) => (
               <a 
                 key={link.name} 
                 href={link.url}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
                 className="group flex items-center gap-2 font-display text-base md:text-lg font-medium tracking-tight hover:text-brand-yellow transition-colors relative"
               >
                 {link.name}
@@ -45,7 +48,6 @@ export const Contact = () => {
             ))}
           </motion.div>
         </div>
-
         <div className="mt-32 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center text-white/60 font-sans text-sm">
           <p>&copy; {new Date().getFullYear()} 個人作品集. 保留所有權利。</p>
           <div className="flex items-center gap-2 mt-4 md:mt-0">
