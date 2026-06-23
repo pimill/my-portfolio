@@ -62,7 +62,7 @@ export const Contact = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto mt-12 w-full"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-4xl mx-auto mt-12 w-full items-stretch"
           >
             {links.map((link) => {
               const Icon = link.icon;
@@ -72,15 +72,17 @@ export const Contact = () => {
                   href={link.url}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
-                  className="group flex flex-col items-center gap-3 border border-white/20 hover:border-brand-yellow hover:bg-white/5 rounded-2xl px-4 py-6 transition-all cursor-pointer"
+                  className="group flex flex-col items-center gap-3 border border-white/20 hover:border-brand-yellow hover:bg-white/5 rounded-2xl px-4 py-6 transition-all cursor-pointer h-full"
                 >
                   <Icon className="w-6 h-6 text-brand-yellow transition-transform group-hover:scale-110" />
-                  <div className="text-center">
+                  <div className="flex flex-col items-center text-center w-full">
                     <div className="font-display font-bold text-sm md:text-base uppercase tracking-wide">
                       {link.name}
                     </div>
-                    <div className="text-xs md:text-sm text-white/60 mt-1 break-all group-hover:text-white/90 transition-colors">
-                      {link.value}
+                    <div className="min-h-[2.25rem] flex items-center justify-center mt-2">
+                      <span className="text-xs md:text-sm text-white/60 break-all leading-snug group-hover:text-white/90 transition-colors">
+                        {link.value}
+                      </span>
                     </div>
                   </div>
                 </a>
