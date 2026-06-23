@@ -128,14 +128,14 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                   </div>
                 </div>
 
-                {/* ── 聯絡資訊區塊（重新編排） ── */}
+                
                 <div className="mt-24 pt-16 border-t border-brand-light-gray/60 relative z-20">
                   <h3 className="font-display text-2xl font-bold mb-10 flex items-center gap-3">
                     聯絡資訊
                     <div className="w-8 h-px bg-brand-red" />
                   </h3>
 
-                  {/* Social Media — 膠囊按鈕列 */}
+                  
                   <div className="mb-10">
                     <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-5">
                       Social Media
@@ -168,13 +168,13 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     </div>
                   </div>
 
-                  {/* Contact Details — 卡片格列 */}
+                  
                   <div>
                     <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-5">
                       Contact Details
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      {/* Email */}
+                      
                       <a
                         href="mailto:fpizzayz2@gmail.com"
                         onClick={(e) => e.stopPropagation()}
@@ -188,7 +188,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         </span>
                       </a>
 
-                      {/* 電話 */}
+                      
                       <a
                         href="tel:0925367291"
                         onClick={(e) => e.stopPropagation()}
@@ -202,7 +202,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         </span>
                       </a>
 
-                      {/* LINE */}
+                      
                       <a
                         href="https://line.me/ti/p/~514687"
                         target="_blank"
@@ -220,7 +220,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     </div>
                   </div>
                 </div>
-                {/* ── 聯絡資訊區塊結束 ── */}
+                
 
               </div>
             </div>
