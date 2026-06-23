@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-red: #FF1A23;
+  --color-brand-dark-red: #D70015;
+  --color-brand-light-gray: #E8E8E8;
+  --color-brand-dark-gray: #222222;
+  --color-brand-yellow: #FFF000;
+  --color-brand-blue: #00B7FF;
+
+  --font-sans: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #222222;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #FFF000;
+  color: #FF1A23;
+}

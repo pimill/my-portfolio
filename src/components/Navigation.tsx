@@ -1,0 +1,52 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { MushroomIcon } from './MushroomIcon';
+
+export const Navigation = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const links = [
+    { name: '精選作品', href: '#works' },
+    { name: '關於我', href: '#about' },
+    { name: '聯絡資訊', href: '#contact' },
+  ];
+
+  return (
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ delay: 2.5, duration: 0.8 }}
+      className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md py-4 shadow-sm text-brand-dark-gray' : 'bg-transparent py-8 text-white'}`}
+    >
+      <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        <a href="#hero" className="flex items-center gap-2 group">
+          <MushroomIcon className={`w-8 h-8 transition-transform group-hover:scale-110 ${!isScrolled && 'text-brand-yellow'}`} />
+          <span className="font-display font-bold text-xl tracking-tight uppercase hidden md:block">PORTFOLIO</span>
+        </a>
+
+        <ul className="flex gap-8">
+          {links.map((link) => (
+            <li key={link.name} className="relative group">
+              <a 
+                href={link.href}
+                className="font-sans text-sm md:text-base font-medium transition-all group-hover:font-bold tracking-wide uppercase"
+              >
+                {link.name}
+              </a>
+              {/* Mushroom stem underline */}
+              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-current transition-all duration-300 rounded-full group-hover:w-full opacity-0 group-hover:opacity-100" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.nav>
+  );
+};
