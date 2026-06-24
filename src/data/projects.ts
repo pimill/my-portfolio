@@ -1,64 +1,46 @@
 import { Project } from '../types';
+import psychedelicImg from '../assets/images/psychedelic.jpg';
+import snakeCnyImg from '../assets/images/snake-cny.jpg';
+import forestHandImg from '../assets/images/forest-hand.jpg';
 
 export const projects: Project[] = [
   {
     id: "1",
-    title: "生態品牌重塑",
-    category: "品牌設計",
-    coverImage: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800",
-    heroImage: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1600",
-    description: "為一個永續時尚品牌進行完整的品牌識別重塑。目標是創造一種能夠表達環保意識且不落俗套的視覺語言。",
-    process: ["品牌策略與定位", "標誌設計與字體選擇", "色彩計畫發展", "品牌規範重塑"],
-    outcomes: ["品牌認知度提升 40%", "成功導入 5 家實體門市", "建立一致的數位視覺形象"]
+    title: "虛",
+    category: "海報設計",
+    coverImage: psychedelicImg,
+    heroImage: psychedelicImg,
+    description: "一張以抽象線稿構築的海報創作，透過糾結纏繞的白色線條，描繪意識流動與感知擴散的瞬間。",
+    concept: "以鹿首般的有機形體作為視覺核心，讓線條從具象逐漸瓦解成抽象的漩渦與漸層，象徵知覺從清晰走向迷幻的過程；深色漸層背景則營造出沉浸、向內探索的氛圍。",
+    specs: ["尺寸：A3（297 × 420 mm）", "解析度：300 dpi", "色彩模式：CMYK（印刷規格）", "格式：直式海報"],
+    colorPalette: ["#0A0F0F", "#203232", "#455354", "#9DA5A6", "#FFFFFF"],
+    process: ["線稿草圖發想", "向量線條繪製", "漸層背景調色", "圖層疊加與最終輸出"],
+    outcomes: ["完成一張可印刷輸出的視覺海報", "建立個人風格化的線稿語言", "作為作品集代表作之一"]
   },
   {
     id: "2",
-    title: "月球咖啡烘焙",
-    category: "包裝設計",
-    coverImage: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?auto=format&fit=crop&q=80&w=800",
-    heroImage: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?auto=format&fit=crop&q=80&w=1600",
-    description: "為手工咖啡烘焙坊設計的包裝。以月相變化為靈感，為每一款配方豆設計了獨特的宇宙插畫。",
-    process: ["包裝結構設計", "配方豆系列插畫", "印刷材質挑選", "打樣與測試"],
-    outcomes: ["入選 2023 年度最佳包裝設計", "創造高分享率的開箱體驗", "直接面對消費者 (DTC) 銷量成長"]
+    title: "蛇來運轉",
+    category: "節慶海報設計",
+    coverImage: snakeCnyImg,
+    heroImage: snakeCnyImg,
+    description: "為蛇年新春創作的賀歲海報，以紅黑配色搭配同心圓紋與蛇形線條，呈現「時來運轉」的吉慶氛圍。",
+    concept: "將生肖蛇的形體簡化為流動的白色線條，與層疊的同心圓圖案交織，呼應傳統紋樣中「圓滿」與「循環」的意象；四角的篆刻印章式圖形強化節慶感與東方識別。",
+    specs: ["尺寸：A4（210 × 297 mm）", "解析度：150 dpi", "色彩模式：RGB", "格式：直式海報"],
+    colorPalette: ["#000000", "#33090A", "#9A1314", "#E61A17", "#FFFFFF"],
+    process: ["生肖造型發想", "同心圓紋樣設計", "中英文標準字排版", "整體配色調整"],
+    outcomes: ["完成一套可延伸應用於賀卡與社群版面的視覺", "建立節慶系列的紅黑視覺語言"]
   },
   {
     id: "3",
-    title: "霓虹脈動音樂節",
-    category: "平面設計",
-    coverImage: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=800",
-    heroImage: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=1600",
-    description: "東京電子音樂節的主視覺與行銷物設計。大膽的色彩、動態字體與故障藝術 (Glitch) 美學交織。",
-    process: ["主視覺概念發想", "系列海報設計", "社群媒體視覺範本", "周邊商品設計"],
-    outcomes: ["一萬張門票全數完售", "社群媒體病毒式行銷成功", "榮獲海報設計獎項"]
-  },
-  {
-    id: "4",
-    title: "綠洲護膚",
-    category: "介面設計",
-    coverImage: "https://images.unsplash.com/photo-1556811239-08ea00392ce5?auto=format&fit=crop&q=80&w=800",
-    heroImage: "https://images.unsplash.com/photo-1556811239-08ea00392ce5?auto=format&fit=crop&q=80&w=1600",
-    description: "極簡護膚品牌的電子商務網站設計。使用者介面著重於乾淨的留白、大尺寸圖像以及流暢的購物體驗。",
-    process: ["線框圖繪製與使用者體驗研究", "介面設計與原型製作", "互動設計", "設計系統建立"],
-    outcomes: ["轉換率提升 20%", "跳出率顯著降低", "獲得 Awwwards 提名"]
-  },
-  {
-    id: "5",
-    title: "城市植栽",
+    title: "Treepattern",
     category: "插畫設計",
-    coverImage: "https://images.unsplash.com/photo-1493612216891-65cbf18dcece?auto=format&fit=crop&q=80&w=800",
-    heroImage: "https://images.unsplash.com/photo-1493612216891-65cbf18dcece?auto=format&fit=crop&q=80&w=1600",
-    description: "為雜誌專題創作的系列插畫，探討城市園藝以及如何將自然融入公寓生活中。",
-    process: ["概念草圖", "色彩探索", "向量插畫完稿", "版面整合"],
-    outcomes: ["刊登於國際設計雜誌", "延伸推出藝術版畫系列", "於當地藝廊展出"]
-  },
-  {
-    id: "6",
-    title: "匠心精釀",
-    category: "品牌設計",
-    coverImage: "https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&q=80&w=800",
-    heroImage: "https://images.unsplash.com/photo-1515405295579-ba7b45403062?auto=format&fit=crop&q=80&w=1600",
-    description: "現代精釀啤酒廠的品牌形象設計。",
-    process: ["標誌設計", "酒標設計", "品牌規範建立"],
-    outcomes: ["品牌成功上市", "建立強烈的地方品牌認知"]
+    coverImage: forestHandImg,
+    heroImage: forestHandImg,
+    description: "以手部與樹根意象結合的線稿插畫，描繪人與自然之間根植、守護的連結。",
+    concept: "手掌的指紋紋理延伸成樹根般的線條，向下扎根於波浪狀的土地與幾何星形圖騰，傳遞「保護」與「扎根」的雙重意涵；全紅背景強化視覺張力與記憶點。",
+    specs: ["尺寸：A4（210 × 297 mm）", "解析度：300 dpi", "色彩模式：RGB", "格式：直式海報"],
+    colorPalette: ["#C51111", "#CA2322", "#D04442", "#DA6D6B", "#FFFFFF"],
+    process: ["手部與樹根造型結合發想", "線稿細節繪製", "背景紋樣設計", "標準字與圖形排版"],
+    outcomes: ["完成一張具個人風格的概念插畫海報", "延伸發展手繪線稿系列"]
   }
 ];
