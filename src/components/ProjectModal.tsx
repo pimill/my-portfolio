@@ -98,6 +98,9 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               </div>
 
               <div className="prose prose-lg max-w-none text-brand-dark-gray">
+                <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-3">
+                  專案簡介
+                </span>
                 <p className="text-xl md:text-3xl font-light leading-relaxed mb-16">
                   {project.description}
                 </p>
@@ -134,6 +137,62 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     </ul>
                   </div>
                 </div>
+
+                {/* 設計概念 */}
+                {project.concept && (
+                  <div className="mt-16">
+                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+                      設計概念
+                      <div className="w-8 h-px bg-brand-red" />
+                    </h3>
+                    <p className="text-lg leading-relaxed text-brand-dark-gray/80">
+                      {project.concept}
+                    </p>
+                  </div>
+                )}
+
+                {/* 設計規格 */}
+                {project.specs && project.specs.length > 0 && (
+                  <div className="mt-16">
+                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+                      設計規格
+                      <div className="w-8 h-px bg-brand-blue" />
+                    </h3>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {project.specs.map((spec, idx) => (
+                        <li
+                          key={idx}
+                          className="text-base text-brand-dark-gray/80 border-b border-brand-light-gray/60 pb-2"
+                        >
+                          {spec}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* 色彩計畫 */}
+                {project.colorPalette && project.colorPalette.length > 0 && (
+                  <div className="mt-16">
+                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+                      色彩計畫
+                      <div className="w-8 h-px bg-brand-red" />
+                    </h3>
+                    <div className="flex flex-wrap gap-5">
+                      {project.colorPalette.map((color, idx) => (
+                        <div key={idx} className="flex flex-col items-center gap-2">
+                          <div
+                            className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-brand-light-gray/60 shadow-sm"
+                            style={{ backgroundColor: color }}
+                          />
+                          <span className="text-xs font-mono text-brand-dark-gray/60 uppercase">
+                            {color}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* ════════════════════════════════
                     聯絡資訊
