@@ -1,131 +1,79 @@
-import { FC, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
+import { projects } from '../data/projects';
+import { useState } from 'react';
+import { ProjectModal } from './ProjectModal';
 import { Project } from '../types';
 import { MushroomIcon } from './MushroomIcon';
 
-interface ProjectModalProps {
-  project: Project | null;
-  onClose: () => void;
-}
-
-export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
-  const isOpen = !!project;
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isOpen]);
-
-  if (!project) return null;
+export const Works = () => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
-          />
-          
-          <motion.div
-            initial={{ scale: 0.95, opacity: 0, y: 10 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.95, opacity: 0, y: 10 }}
-            className="relative w-full max-w-[1000px] bg-white rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
-            /* 移除 max-height 的限制，讓內容決定高度，避免出現捲軸 */
-          >
-            <button 
-              onClick={onClose} 
-              className="absolute top-4 right-4 z-50 p-2 text-gray-400 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors bg-white/80"
+    <section id="works" className="py-24 md:py-40 px-4 md:px-12 bg-[#FAFAFA] relative font-sans">
+      <div className="container mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-24 flex items-center gap-5 justify-center md:justify-start"
+        >
+          <MushroomIcon className="w-10 h-10 text-[#FF1A23]" />
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+            歷年作品
+          </h2>
+        </motion.div>
+
+        {/* 使用錯落與疊加排版，製造 Z 軸立體感 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-24 gap-x-12 max-w-[1200px] mx-auto mt-10">
+          {projects.map((project, idx) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: (idx % 2) * 0.15, duration: 0.8, ease: "easeOut" }}
+              className="group cursor-pointer flex flex-col relative"
+              onClick={() => setSelectedProject(project)}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            <div className="w-full md:w-[45%] bg-gray-50 flex items-center justify-center p-6 border-r border-gray-100">
-              <img
-                src={project.heroImage || project.coverImage}
-                alt={project.title}
-                className="w-full h-auto object-contain drop-shadow-sm"
-              />
-            </div>
-
-            {/* 移除 overflow-y-auto，不再出現捲軸 */}
-            <div className="w-full md:w-[55%] flex flex-col p-6 md:p-8">
-              
-              <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
-                <MushroomIcon className="w-7 h-7 text-[#FF1A23]" />
-                <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-wide">
-                  {project.title}
-                </h2>
+              {/* 圖片層：帶有深邃陰影，hover 時上浮 */}
+              <div className="relative w-full aspect-[4/5] rounded-xl bg-gray-100 overflow-hidden shadow-[0_15px_40px_-10px_rgba(0,0,0,0.15)] group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] transition-all duration-500 transform group-hover:-translate-y-2">
+                <img
+                  src={project.coverImage}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                />
+                {/* 微漸層遮罩 */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
 
-              <div className="space-y-6 text-gray-700 flex-1">
-                
-                <section>
-                  <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2">專案簡介</h3>
-                  <p className="leading-relaxed text-[13px] text-gray-600">{project.description}</p>
-                </section>
-
-                {project.concept && (
-                  <section>
-                    <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2">設計概念</h3>
-                    <p className="leading-relaxed text-[13px] text-gray-600">{project.concept}</p>
-                  </section>
-                )}
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {project.specs && project.specs.length > 0 && (
-                    <section>
-                      <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2">設計規格 / SPECS</h3>
-                      <ul className="text-[12px] space-y-1 text-gray-500">
-                        {project.specs.map((spec, i) => <li key={i}>{spec}</li>)}
-                      </ul>
-                    </section>
-                  )}
-
-                  {project.colorPalette && project.colorPalette.length > 0 && (
-                    <section>
-                      <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2">色彩計畫 / COLORS</h3>
-                      <div className="flex flex-wrap gap-3">
-                        {project.colorPalette.map((color, i) => (
-                          <div key={i} className="flex flex-col items-center gap-1.5">
-                            <div 
-                              className="w-6 h-6 rounded-full border border-gray-200 shadow-sm" 
-                              style={{ backgroundColor: color }} 
-                              title={color} 
-                            />
-                            <span className="text-[9px] text-gray-400 font-mono uppercase">{color}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </section>
-                  )}
+              {/* 文字懸浮層：向上負邊距 (-mt-20) 疊加在圖片上方，打破平面 */}
+              <div className="relative w-[85%] mx-auto -mt-20 bg-white rounded-xl p-6 md:p-8 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.1)] group-hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.15)] transition-all duration-500 transform group-hover:-translate-y-3 z-10 border border-gray-100">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-bold tracking-widest text-[#FF1A23] uppercase bg-red-50 px-3 py-1 rounded-full">
+                    {project.category}
+                  </span>
+                  <span className="text-gray-300 font-mono text-sm font-bold">
+                    {(idx + 1).toString().padStart(2, '0')}
+                  </span>
                 </div>
 
-                <section className="pt-4 mt-6 border-t border-gray-100">
-                  <h3 className="text-[#FF1A23] font-bold text-[10px] tracking-widest mb-3">聯絡</h3>
-                  <div className="flex flex-wrap gap-2 text-[11px] text-gray-500">
-                    <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-gray-50">IG @r_yobiii_618</span>
-                    <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-gray-50">Behance</span>
-                    <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-gray-50">fpizzayz2@gmail.com</span>
-                    <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-gray-50">0925-367-291</span>
-                  </div>
-                </section>
+                <h3 className="font-display text-2xl font-bold text-gray-900 group-hover:text-[#FF1A23] transition-colors duration-300 mb-3">
+                  {project.title}
+                </h3>
                 
+                <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
+                  {project.description}
+                </p>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
-      )}
-    </AnimatePresence>
+      </div>
+
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+    </section>
   );
 };
