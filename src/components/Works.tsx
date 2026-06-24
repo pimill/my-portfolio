@@ -34,12 +34,12 @@ export const Works = () => {
               className="group cursor-pointer"
               onClick={() => setSelectedProject(project)}
             >
-              {/* 圖片直接填滿卡片，無邊框無 padding */}
-              <div className="aspect-[3/4] rounded-sm overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]">
+              {/* 預覽圖片剛好呈現，不被裁切 */}
+              <div className="aspect-[3/4] rounded-sm overflow-hidden transition-transform duration-500 group-hover:scale-[1.02] bg-neutral-50/50 flex items-center justify-center">
                 <img
                   src={project.coverImage}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
 
