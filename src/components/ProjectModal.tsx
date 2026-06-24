@@ -26,7 +26,6 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          {/* 半透明背景 */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -35,15 +34,13 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
             className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
           />
           
-          {/* 白底彈窗本體 (縮小最大寬度為 1000px，最大高度 85vh) */}
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 10 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 10 }}
             className="relative w-full max-w-[1000px] bg-white rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden"
-            style={{ maxHeight: '85vh' }}
+            /* 移除 max-height 的限制，讓內容決定高度，避免出現捲軸 */
           >
-            {/* 關閉按鈕 */}
             <button 
               onClick={onClose} 
               className="absolute top-4 right-4 z-50 p-2 text-gray-400 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors bg-white/80"
@@ -53,27 +50,24 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
               </svg>
             </button>
 
-            {/* 左側：大圖展示區 (稍微縮減比例) */}
-            <div className="w-full md:w-[45%] bg-gray-50 flex items-center justify-center p-6 border-r border-gray-100 relative">
+            <div className="w-full md:w-[45%] bg-gray-50 flex items-center justify-center p-6 border-r border-gray-100">
               <img
                 src={project.heroImage || project.coverImage}
                 alt={project.title}
-                className="w-full h-auto max-h-[75vh] object-contain drop-shadow-sm"
+                className="w-full h-auto object-contain drop-shadow-sm"
               />
             </div>
 
-            {/* 右側：文字資訊區 (縮小 padding 與間距) */}
-            <div className="w-full md:w-[55%] flex flex-col p-6 md:p-8 overflow-y-auto">
+            {/* 移除 overflow-y-auto，不再出現捲軸 */}
+            <div className="w-full md:w-[55%] flex flex-col p-6 md:p-8">
               
-              {/* 標題區 */}
-              <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4 shrink-0">
+              <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
                 <MushroomIcon className="w-7 h-7 text-[#FF1A23]" />
                 <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-wide">
                   {project.title}
                 </h2>
               </div>
 
-              {/* 內容區塊 (縮小間距 space-y-6) */}
               <div className="space-y-6 text-gray-700 flex-1">
                 
                 <section>
@@ -88,9 +82,7 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                   </section>
                 )}
 
-                {/* 兩欄資訊排版 (包含規格、色彩、流程、成果) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  
                   {project.specs && project.specs.length > 0 && (
                     <section>
                       <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2">設計規格 / SPECS</h3>
@@ -117,27 +109,8 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                       </div>
                     </section>
                   )}
-
-                  {project.process && project.process.length > 0 && (
-                    <section>
-                      <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2">設計流程 / PROCESS</h3>
-                      <ul className="text-[12px] space-y-1 text-gray-500 list-decimal list-inside">
-                        {project.process.map((step, i) => <li key={i}>{step}</li>)}
-                      </ul>
-                    </section>
-                  )}
-
-                  {project.outcomes && project.outcomes.length > 0 && (
-                    <section>
-                      <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2">最終成果 / OUTCOMES</h3>
-                      <ul className="text-[12px] space-y-1 text-gray-500 list-disc list-inside">
-                        {project.outcomes.map((outcome, i) => <li key={i}>{outcome}</li>)}
-                      </ul>
-                    </section>
-                  )}
                 </div>
 
-                {/* 聯絡資訊區 (置底) */}
                 <section className="pt-4 mt-6 border-t border-gray-100">
                   <h3 className="text-[#FF1A23] font-bold text-[10px] tracking-widest mb-3">聯絡</h3>
                   <div className="flex flex-wrap gap-2 text-[11px] text-gray-500">
