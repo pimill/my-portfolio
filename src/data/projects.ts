@@ -19,7 +19,7 @@ export const projects: Project[] = [
   },
   {
     id: "2",
-    title: "蛇來運轉",
+    title: "2025 蛇年海報設計｜蛇來運轉",
     category: "節慶海報設計",
     coverImage: snakeCnyImg,
     heroImage: snakeCnyImg,
