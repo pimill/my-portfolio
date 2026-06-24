@@ -14,7 +14,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white">
       <Loader />
-      {/* 簡化導覽列邏輯，因為現在改用彈跳視窗，不切換頁面 */}
+      {/* 導覽列保持在首頁 */}
       <Navigation currentView="home" onViewChange={() => {}} />
       <main>
         <Hero />
