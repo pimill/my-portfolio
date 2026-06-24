@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '../types';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { MushroomIcon } from './MushroomIcon';
 import { X } from 'lucide-react';
 
@@ -73,19 +73,10 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               <X className="w-6 h-6" />
             </button>
 
-            {/* Hero 圖片 */}
-            <div className="w-full h-[60vh] md:h-[80vh] relative">
-              <img
-                src={project.heroImage}
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/20" />
-            </div>
-
-            {/* 內容區 */}
-            <div className="container mx-auto px-6 py-16 md:py-24 max-w-4xl">
-              <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-16">
+            {/* 內容區（移除頂部會被裁切的 hero 大圖，直接從標題開始） */}
+            <div className="container mx-auto px-6 pt-24 md:pt-28 pb-16 md:pb-24 max-w-4xl">
+              {/* 標題列：左邊分類＋名稱，右邊放設計規格補充資訊 */}
+              <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12 pb-12 border-b border-brand-light-gray/60">
                 <div>
                   <span className="text-brand-red font-bold tracking-widest relative uppercase text-sm mb-4 block">
                     {project.category}
@@ -95,53 +86,44 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     {project.title}
                   </h2>
                 </div>
+
+                {project.specs && project.specs.length > 0 && (
+                  <div className="text-left md:text-right shrink-0">
+                    <span className="text-xs font-bold tracking-widest text-brand-blue uppercase block opacity-60 mb-3">
+                      設計規格
+                    </span>
+                    <ul className="space-y-1.5">
+                      {project.specs.map((spec, idx) => (
+                        <li key={idx} className="text-sm text-brand-dark-gray/70">
+                          {spec}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               <div className="prose prose-lg max-w-none text-brand-dark-gray">
                 <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-3">
                   專案簡介
                 </span>
-                <p className="text-xl md:text-3xl font-light leading-relaxed mb-16">
+                <p className="text-lg md:text-2xl font-light leading-relaxed mb-12">
                   {project.description}
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                  <div>
-                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
-                      設計過程
-                      <div className="w-8 h-px bg-brand-red" />
-                    </h3>
-                    <ul className="space-y-4">
-                      {project.process.map((step, idx) => (
-                        <li key={idx} className="flex gap-4 text-lg">
-                          <span className="text-brand-red font-mono font-bold">
-                            {(idx + 1).toString().padStart(2, '0')}
-                          </span>
-                          {step}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
-                      最終成果
-                      <div className="w-8 h-px bg-brand-blue" />
-                    </h3>
-                    <ul className="space-y-4">
-                      {project.outcomes.map((outcome, idx) => (
-                        <li key={idx} className="flex gap-4 text-lg items-center">
-                          <div className="w-2 h-2 rounded-full bg-brand-blue" />
-                          {outcome}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                {/* 作品完整圖（不裁切、不加邊框） */}
+                <div className="mb-12">
+                  <img
+                    src={project.heroImage}
+                    alt={project.title}
+                    className="w-full h-auto"
+                  />
                 </div>
 
                 {/* 設計概念 */}
                 {project.concept && (
-                  <div className="mt-16">
-                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+                  <div className="mb-12">
+                    <h3 className="font-display text-2xl font-bold mb-5 flex items-center gap-3">
                       設計概念
                       <div className="w-8 h-px bg-brand-red" />
                     </h3>
@@ -151,30 +133,10 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                   </div>
                 )}
 
-                {/* 設計規格 */}
-                {project.specs && project.specs.length > 0 && (
-                  <div className="mt-16">
-                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
-                      設計規格
-                      <div className="w-8 h-px bg-brand-blue" />
-                    </h3>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {project.specs.map((spec, idx) => (
-                        <li
-                          key={idx}
-                          className="text-base text-brand-dark-gray/80 border-b border-brand-light-gray/60 pb-2"
-                        >
-                          {spec}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
                 {/* 色彩計畫 */}
                 {project.colorPalette && project.colorPalette.length > 0 && (
-                  <div className="mt-16">
-                    <h3 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+                  <div className="mb-12">
+                    <h3 className="font-display text-2xl font-bold mb-5 flex items-center gap-3">
                       色彩計畫
                       <div className="w-8 h-px bg-brand-red" />
                     </h3>
@@ -197,7 +159,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 {/* ════════════════════════════════
                     聯絡資訊
                 ════════════════════════════════ */}
-                <div className="mt-24 pt-16 border-t border-brand-light-gray/60">
+                <div className="mt-20 pt-12 border-t border-brand-light-gray/60">
                   <h3 className="font-display text-2xl font-bold mb-10 flex items-center gap-3">
                     聯絡資訊
                     <div className="w-8 h-px bg-brand-red" />
@@ -252,7 +214,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                         <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
                           Email
                         </span>
-                        <span className="font-medium text-sm group-hover:text-brand-red transition-colors break-all">
+                        <span className="font-medium text-sm group-hover:text-brand-red transition-colors truncate block">
                           fpizzayz2@gmail.com
                         </span>
                       </a>
