@@ -17,7 +17,7 @@ export const Works = () => {
           viewport={{ once: true }}
           className="mb-20 flex items-center gap-6"
         >
-          <h2 className="font-display text-5xl md:text-7xl font-bold text-brand-dark-gray uppercase tracking-tighter">精選作品</h2>
+          <h2 className="font-display text-5xl md:text-7xl font-bold text-brand-dark-gray uppercase tracking-tighter">歷年作品</h2>
           <MushroomIcon className="w-12 h-12 text-brand-red" />
         </motion.div>
 
@@ -40,7 +40,7 @@ export const Works = () => {
                 <img
                   src={project.coverImage}
                   alt={project.title}
-                  className="max-w-full max-h-full w-auto h-auto object-contain shadow-xl"
+                  className="max-w-full max-h-full w-auto h-auto object-contain"
                 />
               </div>
 
