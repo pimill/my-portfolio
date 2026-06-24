@@ -5,7 +5,6 @@ export interface Project {
   coverImage: string;
   heroImage: string;
   description: string;
-  // 📋 確保有加上以下這幾行：
   concept?: string;
   specs?: string[];
   colorPalette?: string[];
