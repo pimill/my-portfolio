@@ -14,7 +14,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white">
       <Loader />
-      {/* 導覽列保持在首頁 */}
       <Navigation currentView="home" onViewChange={() => {}} />
       <main>
         <Hero />
