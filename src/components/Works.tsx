@@ -17,7 +17,9 @@ export const Works = () => {
           viewport={{ once: true }}
           className="mb-20 flex items-center gap-6"
         >
-          <h2 className="font-display text-5xl md:text-7xl font-bold text-brand-dark-gray uppercase tracking-tighter">歷年作品</h2>
+          <h2 className="font-display text-5xl md:text-7xl font-bold text-brand-dark-gray uppercase tracking-tighter">
+            歷年作品
+          </h2>
           <MushroomIcon className="w-12 h-12 text-brand-red" />
         </motion.div>
 
@@ -32,19 +34,16 @@ export const Works = () => {
               className="group cursor-pointer"
               onClick={() => setSelectedProject(project)}
             >
-              {/* 色塊置中圖片，保留完整比例不裁切 */}
-              <div
-                className="aspect-[3/4] rounded-sm overflow-hidden flex items-center justify-center p-6 md:p-10 transition-transform duration-500 group-hover:scale-[1.02]"
-                style={{ backgroundColor: project.colorPalette?.[0] ?? '#1A1A1A' }}
-              >
+              {/* 圖片直接填滿卡片，無邊框無 padding */}
+              <div className="aspect-[3/4] rounded-sm overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]">
                 <img
                   src={project.coverImage}
                   alt={project.title}
-                  className="max-w-full max-h-full w-auto h-auto object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* 小字標示，不壓在圖片上 */}
+              {/* 文字標示 */}
               <div className="mt-4 flex items-center justify-between">
                 <div>
                   <h3 className="font-display text-sm md:text-base font-bold uppercase tracking-tight text-brand-dark-gray">
