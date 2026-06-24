@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '../types';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { MushroomIcon } from './MushroomIcon';
 import { X } from 'lucide-react';
 
@@ -10,8 +10,6 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
-  const modalRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (project) {
       const scrollY = window.scrollY;
@@ -21,7 +19,6 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
     }
-
     return () => {
       const scrollY = document.body.style.top;
       document.body.style.position = '';
@@ -52,14 +49,13 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             <MushroomIcon className="w-12 h-12" />
           </motion.div>
 
-          {/* Modal 主體 */}
+          {/* Modal 主體：全螢幕左右雙欄，整體 overflow-hidden 不滾動 */}
           <motion.div
-            ref={modalRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
-            className="fixed inset-0 z-50 bg-white overflow-y-auto pointer-events-auto"
+            className="fixed inset-0 z-50 bg-white overflow-hidden pointer-events-auto flex flex-col md:flex-row"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 關閉按鈕 */}
@@ -68,86 +64,93 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 e.stopPropagation();
                 onClose();
               }}
-              className="fixed top-6 right-6 md:top-10 md:right-10 z-50 p-4 bg-brand-light-gray hover:bg-brand-red hover:text-white rounded-full transition-colors group cursor-pointer"
+              className="fixed top-6 right-6 z-50 p-3 bg-brand-light-gray hover:bg-brand-red hover:text-white rounded-full transition-colors cursor-pointer"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
 
-            {/* 內容區（移除頂部會被裁切的 hero 大圖，直接從標題開始） */}
-            <div className="container mx-auto px-6 pt-24 md:pt-28 pb-16 md:pb-24 max-w-4xl">
-              {/* 標題列：左邊分類＋名稱，右邊放設計規格補充資訊 */}
-              <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12 pb-12 border-b border-brand-light-gray/60">
-                <div>
-                  <span className="text-brand-red font-bold tracking-widest relative uppercase text-sm mb-4 block">
-                    {project.category}
-                    <MushroomIcon className="w-4 h-4 inline-block ml-2 mb-1" />
-                  </span>
-                  <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-brand-dark-gray">
-                    {project.title}
-                  </h2>
-                </div>
+            {/* ── 左欄：作品圖（佔 45%，不裁切）────────────────────── */}
+            <div
+              className="w-full h-48 md:h-full md:w-[45%] flex-shrink-0 flex items-center justify-center"
+              style={{ backgroundColor: project.colorPalette?.[0] ?? '#1A1A1A' }}
+            >
+              <img
+                src={project.heroImage}
+                alt={project.title}
+                className="w-full h-full object-contain"
+              />
+            </div>
 
+            {/* ── 右欄：文字內容（手機可內部捲動，桌面單頁顯示）──── */}
+            <div className="flex-1 overflow-y-auto md:overflow-y-auto px-8 py-10 md:px-12 md:py-12 flex flex-col gap-5 md:gap-6">
+
+              {/* 分類 + 標題 */}
+              <div className="pt-2 md:pt-6">
+                <span className="text-brand-red font-bold tracking-widest text-xs uppercase mb-2 block">
+                  {project.category}
+                  <MushroomIcon className="w-3 h-3 inline-block ml-2 mb-0.5" />
+                </span>
+                <h2 className="font-display text-3xl md:text-5xl font-bold uppercase tracking-tighter text-brand-dark-gray leading-tight">
+                  {project.title}
+                </h2>
+              </div>
+
+              {/* 分隔線 */}
+              <div className="w-full h-px bg-brand-light-gray/60" />
+
+              {/* 專案簡介 */}
+              <div>
+                <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-2">
+                  專案簡介
+                </span>
+                <p className="text-sm md:text-base font-light leading-relaxed text-brand-dark-gray">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* 設計概念 */}
+              {project.concept && (
+                <div>
+                  <h3 className="text-xs font-bold tracking-widest uppercase text-brand-dark-gray/60 mb-2 flex items-center gap-2">
+                    設計概念
+                    <div className="flex-1 h-px bg-brand-light-gray/60" />
+                  </h3>
+                  <p className="text-sm leading-relaxed text-brand-dark-gray/75">
+                    {project.concept}
+                  </p>
+                </div>
+              )}
+
+              {/* 規格 + 色彩：橫排並列 */}
+              <div className="flex flex-col sm:flex-row gap-6">
                 {project.specs && project.specs.length > 0 && (
-                  <div className="text-left md:text-right shrink-0">
-                    <span className="text-xs font-bold tracking-widest text-brand-blue uppercase block opacity-60 mb-3">
+                  <div className="flex-1">
+                    <span className="text-xs font-bold tracking-widest text-brand-blue uppercase block opacity-60 mb-2">
                       設計規格
                     </span>
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-1">
                       {project.specs.map((spec, idx) => (
-                        <li key={idx} className="text-sm text-brand-dark-gray/70">
+                        <li key={idx} className="text-xs text-brand-dark-gray/70">
                           {spec}
                         </li>
                       ))}
                     </ul>
                   </div>
                 )}
-              </div>
 
-              <div className="prose prose-lg max-w-none text-brand-dark-gray">
-                <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-3">
-                  專案簡介
-                </span>
-                <p className="text-lg md:text-2xl font-light leading-relaxed mb-12">
-                  {project.description}
-                </p>
-
-                {/* 作品完整圖（不裁切、不加邊框） */}
-                <div className="mb-12">
-                  <img
-                    src={project.heroImage}
-                    alt={project.title}
-                    className="w-full h-auto"
-                  />
-                </div>
-
-                {/* 設計概念 */}
-                {project.concept && (
-                  <div className="mb-12">
-                    <h3 className="font-display text-2xl font-bold mb-5 flex items-center gap-3">
-                      設計概念
-                      <div className="w-8 h-px bg-brand-red" />
-                    </h3>
-                    <p className="text-lg leading-relaxed text-brand-dark-gray/80">
-                      {project.concept}
-                    </p>
-                  </div>
-                )}
-
-                {/* 色彩計畫 */}
                 {project.colorPalette && project.colorPalette.length > 0 && (
-                  <div className="mb-12">
-                    <h3 className="font-display text-2xl font-bold mb-5 flex items-center gap-3">
+                  <div>
+                    <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-2">
                       色彩計畫
-                      <div className="w-8 h-px bg-brand-red" />
-                    </h3>
-                    <div className="flex flex-wrap gap-5">
+                    </span>
+                    <div className="flex flex-wrap gap-3">
                       {project.colorPalette.map((color, idx) => (
-                        <div key={idx} className="flex flex-col items-center gap-2">
+                        <div key={idx} className="flex flex-col items-center gap-1">
                           <div
-                            className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-brand-light-gray/60 shadow-sm"
+                            className="w-8 h-8 rounded-full border border-brand-light-gray/60 shadow-sm"
                             style={{ backgroundColor: color }}
                           />
-                          <span className="text-xs font-mono text-brand-dark-gray/60 uppercase">
+                          <span className="text-[10px] font-mono text-brand-dark-gray/60 uppercase">
                             {color}
                           </span>
                         </div>
@@ -155,117 +158,45 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                     </div>
                   </div>
                 )}
+              </div>
 
-                {/* ════════════════════════════════
-                    聯絡資訊
-                ════════════════════════════════ */}
-                <div className="mt-20 pt-12 border-t border-brand-light-gray/60">
-                  <h3 className="font-display text-2xl font-bold mb-10 flex items-center gap-3">
-                    聯絡資訊
-                    <div className="w-8 h-px bg-brand-red" />
-                  </h3>
-
-                  {/* Social Media — 膠囊按鈕 */}
-                  <div className="mb-10">
-                    <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-5">
-                      Social Media
-                    </span>
-                    <div className="flex flex-wrap gap-3">
-                      {/* Instagram */}
-                      <a
-                        href="https://www.instagram.com/r_yobiii_618/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-2 border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-5 py-2.5 transition-all cursor-pointer"
-                      >
-                        <span className="font-medium text-base">Instagram</span>
-                        <span className="text-sm opacity-40 group-hover:opacity-70 transition-opacity">
-                          @r_yobiii_618
-                        </span>
-                      </a>
-
-                      {/* Behance */}
-                      <a
-                        href="https://www.behance.net/32a0d06b"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-2 border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-5 py-2.5 transition-all cursor-pointer"
-                      >
-                        <span className="font-medium text-base">Behance</span>
-                        <span className="text-sm opacity-40 group-hover:opacity-70 transition-opacity">
-                          作品集
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Contact Details — 卡片格列 */}
-                  <div>
-                    <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-5">
-                      Contact Details
-                    </span>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      {/* Email */}
-                      <a
-                        href="mailto:fpizzayz2@gmail.com"
-                        className="group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer text-left"
-                      >
-                        <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
-                          Email
-                        </span>
-                        <span className="font-medium text-sm group-hover:text-brand-red transition-colors truncate block">
-                          fpizzayz2@gmail.com
-                        </span>
-                      </a>
-
-                      {/* 電話 */}
-                      <a
-                        href="tel:0925367291"
-                        className="group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer text-left"
-                      >
-                        <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
-                          電話
-                        </span>
-                        <span className="font-medium text-sm group-hover:text-brand-red transition-colors">
-                          0925-367-291
-                        </span>
-                      </a>
-
-                      {/* LINE ID */}
-                      <a
-                        href="https://line.me/ti/p/~514687"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex flex-col gap-1.5 border border-brand-light-gray hover:border-brand-red rounded-2xl px-5 py-4 transition-all cursor-pointer text-left"
-                      >
-                        <span className="text-xs font-bold tracking-widest uppercase opacity-40 group-hover:text-brand-red group-hover:opacity-60 transition-colors">
-                          LINE ID
-                        </span>
-                        <span className="font-medium text-sm group-hover:text-brand-red transition-colors">
-                          514687
-                        </span>
-                      </a>
-                    </div>
-                  </div>
+              {/* 聯絡資訊（底部，緊湊膠囊版） */}
+              <div className="mt-auto pt-5 border-t border-brand-light-gray/60">
+                <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-3">
+                  聯絡
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  <a
+                    href="https://www.instagram.com/r_yobiii_618/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-4 py-1.5 transition-all"
+                  >
+                    IG @r_yobiii_618
+                  </a>
+                  <a
+                    href="https://www.behance.net/32a0d06b"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-4 py-1.5 transition-all"
+                  >
+                    Behance
+                  </a>
+                  <a
+                    href="mailto:fpizzayz2@gmail.com"
+                    className="text-xs border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-4 py-1.5 transition-all"
+                  >
+                    fpizzayz2@gmail.com
+                  </a>
+                  <a
+                    href="tel:0925367291"
+                    className="text-xs border border-brand-light-gray hover:border-brand-red hover:text-brand-red rounded-full px-4 py-1.5 transition-all"
+                  >
+                    0925-367-291
+                  </a>
                 </div>
               </div>
             </div>
-
-            {/* 往下捲動提示 */}
-            <div
-              className="fixed bottom-10 left-1/2 -translate-x-1/2 text-brand-red/50 animate-bounce cursor-pointer mix-blend-difference"
-              onClick={(e) => {
-                e.stopPropagation();
-                modalRef.current?.scrollTo({
-                  top: window.innerHeight,
-                  behavior: 'smooth',
-                });
-              }}
-            >
-              <MushroomIcon className="w-6 h-6" />
-            </div>
-
           </motion.div>
         </motion.div>
       )}
