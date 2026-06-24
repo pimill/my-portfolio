@@ -1,4 +1,3 @@
-```tsx
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MushroomIcon } from './MushroomIcon';
@@ -41,11 +40,13 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ delay: 2.5, duration: 0.8 }}
-        className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ${
-          isScrolled
-            ? 'bg-white/90 backdrop-blur-md py-4 shadow-sm text-brand-dark-gray'
-            : 'bg-transparent py-8 text-white'
-        }`}
+        {/* 👇 這裡移除了反引號，改用標準的字串相加，保證不報錯 */}
+        className={
+          "fixed top-0 left-0 right-0 z-40 transition-colors duration-300 " +
+          (isScrolled
+            ? "bg-white/90 backdrop-blur-md py-4 shadow-sm text-brand-dark-gray"
+            : "bg-transparent py-8 text-white")
+        }
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
           {/* Logo — 點擊回頂部 */}
@@ -58,9 +59,10 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
             className="flex items-center gap-2 group"
           >
             <MushroomIcon
-              className={`w-8 h-8 transition-transform group-hover:scale-110 ${
-                !isScrolled && 'text-brand-yellow'
-              }`}
+              className={
+                "w-8 h-8 transition-transform group-hover:scale-110 " +
+                (!isScrolled ? "text-brand-yellow" : "")
+              }
             />
             <span className="font-display font-bold text-xl tracking-tight uppercase hidden md:block">
               PORTFOLIO
@@ -222,5 +224,3 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
     </>
   );
 };
-
-```
