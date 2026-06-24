@@ -53,13 +53,23 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
     <AnimatePresence>
       {project && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          
-          {/* 背景遮罩 (半透明黑 + 輕微模糊) - 移除干擾動畫，完美透視背景 */}
+          {/* 蘑菇展開動畫 */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 150 }}
+            exit={{ scale: 0 }}
+            transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+            className="absolute z-40 text-brand-red bg-transparent flex items-center justify-center pointer-events-none"
+          >
+            <MushroomIcon className="w-12 h-12" />
+          </motion.div>
+
+          {/* 背景遮罩 (半透明黑 + 輕微模糊) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
             onClick={onClose}
             className="fixed inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
           />
@@ -69,7 +79,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.3 }}
+            transition={{ delay: 0.4, duration: 0.3 }}
             className="relative z-50 w-[95%] md:w-[90%] max-w-6xl h-[85vh] md:h-[80vh] bg-white rounded-xl overflow-hidden shadow-2xl flex flex-col md:flex-row"
             onClick={(e) => e.stopPropagation()}
           >
@@ -100,8 +110,8 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               </span>
             </div>
 
-            {/* ── 右欄：文字內容（加大底部 Padding，讓聯絡資訊往上抬）──── */}
-            <div className="flex-1 px-8 pt-8 pb-12 md:px-12 md:pt-10 md:pb-16 flex flex-col justify-between overflow-hidden">
+            {/* ── 右欄：文字內容（不滾動，使用 justify-between 自動分配高度）──── */}
+            <div className="flex-1 px-8 py-8 md:px-12 md:py-10 flex flex-col justify-between overflow-hidden">
               
               <div className="flex flex-col gap-5 md:gap-6">
                 {/* 分類 + 標題 */}
@@ -181,8 +191,8 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 </div>
               </div>
 
-              {/* 聯絡資訊（底部加上 mt-6 增加上方間隔，整體視覺上提） */}
-              <div className="pt-5 border-t border-brand-light-gray/60 mt-6">
+              {/* 聯絡資訊（底部，強制不換行） */}
+              <div className="pt-5 border-t border-brand-light-gray/60 mt-4">
                 <span className="text-xs font-bold tracking-widest text-brand-red uppercase block opacity-60 mb-2">
                   聯絡
                 </span>
@@ -227,7 +237,7 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
                 initial={{ x: '-20vw', y: '60vh', opacity: 0 }}
                 animate={{ 
                   x: '120vw', 
-                  y: ['60vh', '50vh', '65vh', '45vh', '55vh'], 
+                  y: ['60vh', '50vh', '65vh', '45vh', '55vh'], // 模擬蛇行起伏
                   opacity: 1 
                 }}
                 exit={{ opacity: 0 }}
@@ -237,10 +247,14 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
               >
                 {/* 繪製極簡白蛇 SVG */}
                 <svg width="240" height="80" viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* 身體線條 */}
                   <path d="M0,40 C40,10 60,70 100,40 C140,10 160,70 200,40 C215,25 225,35 230,40" stroke="white" strokeWidth="8" strokeLinecap="round" fill="none" />
+                  {/* 頭部 */}
                   <circle cx="230" cy="40" r="10" fill="white" />
+                  {/* 眼睛 */}
                   <circle cx="233" cy="36" r="2" fill="#1A1A1A" />
                   <circle cx="233" cy="44" r="2" fill="#1A1A1A" />
+                  {/* 吐信（舌頭） */}
                   <path d="M240,40 L248,38 M240,40 L248,42" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </motion.div>
