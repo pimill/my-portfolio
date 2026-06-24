@@ -40,7 +40,6 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ delay: 2.5, duration: 0.8 }}
-        {/* 👇 這裡移除了反引號，改用標準的字串相加，保證不報錯 */}
         className={
           "fixed top-0 left-0 right-0 z-40 transition-colors duration-300 " +
           (isScrolled
