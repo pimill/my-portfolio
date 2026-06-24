@@ -3,6 +3,7 @@ import { Project } from './types';
 export const projects: Project[] = [
   {
     id: "1",
+    type: "print", // ← 平面設計
     title: "虛",
     category: "海報設計",
     coverImage: "https://raw.githubusercontent.com/pimill/my-portfolio/main/src/assets/images/psychedelic.jpg",
@@ -16,6 +17,7 @@ export const projects: Project[] = [
   },
   {
     id: "2",
+    type: "print", // ← 平面設計
     title: "2025 蛇年海報設計 | 蛇來運轉",
     category: "節慶海報設計",
     coverImage: "https://raw.githubusercontent.com/pimill/my-portfolio/main/src/assets/images/snake-cny.jpg",
@@ -29,6 +31,7 @@ export const projects: Project[] = [
   },
   {
     id: "3",
+    type: "print", // ← 平面設計
     title: "Rooted Hand | 根生",
     category: "插畫海報設計",
     coverImage: "https://raw.githubusercontent.com/pimill/my-portfolio/main/src/assets/images/forest-hand.jpg",
@@ -42,6 +45,7 @@ export const projects: Project[] = [
   },
   {
     id: "4",
+    type: "print", // ← 平面設計
     title: "MPCC Marketing Visual",
     category: "品牌與視覺設計",
     coverImage: "https://raw.githubusercontent.com/pimill/my-portfolio/main/src/assets/images/MPCC.jpg",
@@ -55,6 +59,7 @@ export const projects: Project[] = [
   },
   {
     id: "5",
+    type: "print", // ← 平面設計
     title: "Neon Frog Anatomy",
     category: "平面設計",
     coverImage: "https://raw.githubusercontent.com/pimill/my-portfolio/main/src/assets/images/FROG.jpg",
@@ -68,6 +73,7 @@ export const projects: Project[] = [
   },
   {
     id: "6",
+    type: "print", // ← 平面設計
     title: "NOVA Cosmic Abstract",
     category: "視覺設計",
     coverImage: "https://raw.githubusercontent.com/pimill/my-portfolio/main/src/assets/images/NOVA.jpg",
@@ -78,5 +84,17 @@ export const projects: Project[] = [
     colorPalette: ["#000000", "#FFFFFF", "#4D4D4D", "#B3B3B3"],
     process: ["流體材質生成與篩選", "幾何圖形疊加", "光影與對比度調整", "文字與視覺平衡"],
     outcomes: ["完成充滿太空氛圍的實驗性視覺", "展現材質與光影處理技巧", "提升抽象美感表現"]
-  }
+  },
+
+  // ↓↓↓ 影音/動態作品範例（你自己的影片加在這裡）↓↓↓
+  // {
+  //   id: "7",
+  //   type: "motion",                          // ← 影音/動態
+  //   title: "你的作品名稱",
+  //   category: "動態設計",
+  //   coverImage: "封面縮圖網址（靜態圖）",
+  //   heroImage:  "封面縮圖網址（靜態圖）",
+  //   videoUrl:   "/my-portfolio/videos/your-file.mp4",  // ← 影片路徑
+  //   description: "作品說明...",
+  // },
 ];
