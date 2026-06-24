@@ -58,13 +58,13 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                   />
                 </div>
                 <div className="flex flex-col h-full overflow-y-auto pr-4">
-                  <div className="flex items-center gap-3 mb-8 shrink-0">
+                  <div className="flex items-center gap-3 mb-5 shrink-0">
                     <MushroomIcon className="w-8 h-8 text-[#FF1A23]" />
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                       {project.title}
                     </h2>
                   </div>
-                  <div className="space-y-8 text-sm md:text-base text-gray-700 flex-1">
+                  <div className="space-y-5 text-sm md:text-base text-gray-700 flex-1">
                     <section>
                       <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">專案簡介</h3>
                       <p className="leading-relaxed">{project.description}</p>
@@ -75,11 +75,11 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                         <p className="leading-relaxed">{project.concept}</p>
                       </section>
                     )}
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-2 gap-4">
                       {project.specs && project.specs.length > 0 && (
                         <section>
                           <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">設計規格</h3>
-                          <ul className="text-xs space-y-1.5 text-gray-500">
+                          <ul className="text-xs space-y-1 text-gray-500">
                             {project.specs.map((spec, i) => <li key={i}>{spec}</li>)}
                           </ul>
                         </section>
@@ -90,8 +90,8 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                           <div className="flex flex-wrap gap-4">
                             {project.colorPalette.map((color, i) => (
                               <div key={i} className="flex flex-col items-center gap-1.5">
-                                <div className="w-6 h-6 rounded-full border border-gray-200" style={{ backgroundColor: color }} title={color} />
-                                <span className="text-[10px] text-gray-400 font-mono uppercase">{color}</span>
+                                <div className="w-6 h-6 rounded-full border border-gray-200 shadow-sm" style={{ backgroundColor: color }} title={color} />
+                                <span className="text-[10px] text-gray-500 font-mono uppercase">{color}</span>
                               </div>
                             ))}
                           </div>
@@ -99,8 +99,8 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                       )}
                     </div>
                     
-                    <section className="pt-6 mt-auto">
-                      <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">聯絡</h3>
+                    <section className="pt-4 mt-auto">
+                      <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-2">聯絡</h3>
                       <div className="flex items-center gap-2 flex-nowrap overflow-x-auto pb-1 whitespace-nowrap text-xs text-gray-600 hide-scrollbar">
                         <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">IG @r_yobiii_618</span>
                         <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">Behance</span>
