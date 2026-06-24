@@ -11,7 +11,6 @@ interface ProjectModalProps {
 export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
   const isOpen = !!project;
 
-  // 當視窗開啟時，禁止背景捲動
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -27,8 +26,6 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
-          
-          {/* 背景遮罩：大紅大紫改為 60% 透明度 + 模糊效果 */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -36,15 +33,12 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
             onClick={onClose}
             className="absolute inset-0 bg-[#FF1A23]/60 backdrop-blur-md cursor-pointer"
           />
-
-          {/* 白色主區塊：不佔滿全螢幕 (max-w-5xl), 剛好一個頁面高度 (max-h-[85vh]) */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh]"
           >
-            {/* 關閉按鈕 */}
             <button 
               onClick={onClose} 
               className="absolute top-4 right-4 z-50 p-2 bg-white/80 hover:bg-gray-100 rounded-full transition-colors"
@@ -53,11 +47,8 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-
-            {/* 內容區域：白色區塊內獨立捲動，不會動到背景 */}
             <div className="flex-1 overflow-y-auto p-6 md:p-12">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* 左側：作品圖片 */}
                 <div className="flex items-start justify-center">
                   <img
                     src={project.heroImage || project.coverImage}
@@ -65,8 +56,6 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                     className="w-full h-auto rounded-lg shadow-sm object-contain"
                   />
                 </div>
-
-                {/* 右側：文字內容 (保留蘑菇動畫與圖示) */}
                 <div className="flex flex-col">
                   <div className="flex items-center gap-3 mb-6">
                     <MushroomIcon className="w-8 h-8 text-[#FF1A23]" />
@@ -74,20 +63,17 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                       {project.title}
                     </h2>
                   </div>
-                  
                   <div className="space-y-6 text-sm md:text-base text-gray-700">
                     <section>
                       <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-2">專案簡介</h3>
                       <p className="leading-relaxed">{project.description}</p>
                     </section>
-
                     {project.concept && (
                       <section>
                         <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-2">設計概念</h3>
                         <p className="leading-relaxed">{project.concept}</p>
                       </section>
                     )}
-
                     <div className="grid grid-cols-2 gap-4">
                       {project.specs && project.specs.length > 0 && (
                         <section>
@@ -97,7 +83,6 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                           </ul>
                         </section>
                       )}
-
                       {project.colorPalette && project.colorPalette.length > 0 && (
                         <section>
                           <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-2">色彩計畫</h3>
