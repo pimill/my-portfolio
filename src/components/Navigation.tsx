@@ -93,7 +93,7 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
         </div>
       </motion.nav>
 
-      {/* 關於我內嵌式彈出視窗 */}
+      {/* 關於我彈出視窗 */}
       <AnimatePresence>
         {isAboutOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -106,12 +106,12 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
               className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
             />
             
-            {/* 視窗本體 */}
+            {/* 視窗本體 - 放大寬度至最大 1050px 以容納左右分欄 */}
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 10 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
-              className="relative w-full max-w-[850px] bg-white rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden text-slate-800"
+              className="relative w-full max-w-[1050px] bg-white rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden text-slate-800"
             >
               {/* 右上角關閉按鈕 */}
               <button 
@@ -123,38 +123,95 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                 </svg>
               </button>
 
-              {/* 左側設計 */}
-              <div className="w-full md:w-[40%] bg-gray-50 flex flex-col items-center justify-center p-8 border-r border-gray-100 min-h-[250px]">
-                <MushroomIcon className="w-20 h-20 text-gray-300 mb-2" />
-                <span className="text-gray-400 text-xs tracking-widest uppercase font-mono">About Me</span>
+              {/* 左側頭像設計：帶有禁止符號的蘑菇 (404無此圖片意象) */}
+              <div className="w-full md:w-[25%] bg-gray-50 flex flex-col items-center justify-center p-6 border-r border-gray-100 min-h-[220px]">
+                <div className="relative flex items-center justify-center mb-3">
+                  <MushroomIcon className="w-20 h-20 text-gray-200" />
+                  {/* 絕對定位的禁止符號疊加層 */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-20 h-20 border-[5px] border-gray-400/60 rounded-full relative flex items-center justify-center">
+                      <div className="absolute w-[5px] h-16 bg-gray-400/60 rotate-45 rounded-full" />
+                    </div>
+                  </div>
+                </div>
+                <span className="text-gray-400 text-[10px] tracking-widest uppercase font-mono font-bold">IMAGE NOT FOUND / 404</span>
               </div>
 
-              {/* 右側區塊：文字與能力標籤 */}
-              <div className="w-full md:w-[60%] flex flex-col p-6 md:p-10 justify-center text-left">
-                <div className="flex items-center gap-3 mb-4 border-b border-gray-100 pb-3">
+              {/* 右側區塊：滿版內容與左右分欄 */}
+              <div className="w-full md:w-[75%] flex flex-col p-6 md:p-8 justify-center text-left">
+                {/* 標題改為：關於我 */}
+                <div className="flex items-center gap-3 mb-5 border-b border-gray-100 pb-3">
                   <MushroomIcon className="w-7 h-7 text-[#FF1A23]" />
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-wide">
-                    關於這裡
+                    關於我
                   </h2>
                 </div>
 
-                <div className="space-y-6 text-gray-700">
-                  <section className="space-y-3 text-[13px] md:text-sm leading-relaxed text-gray-600">
-                    <p>沒有偉大的理想，只有些完成的作品、半途而廢的想法，和很多很多想睡覺的日子。</p>
-                    <p>這裡像蘑菇一樣，不太喜歡被注意。<br/>平常常待在自己的角落慢慢生長，偶爾長出一些作品，或者慢慢發霉、長出苔蘚。</p>
-                  </section>
+                {/* 內文左右分欄架構 */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                  
+                  {/* 左側欄：個人介紹 */}
+                  <div className="space-y-4 text-[12px] md:text-[13px] leading-relaxed text-gray-600 font-sans">
+                    <p>
+                      我是曾琬茹，畢業於崑山科技大學視覺傳達設計系，專注於品牌識別、平面設計與視覺整合設計。擅長透過設計思考將品牌理念轉化為具辨識度與一致性的視覺形象，並重視設計在溝通與商業應用上的價值。
+                    </p>
+                    <p>
+                      熟悉 Adobe Illustrator、Photoshop、InDesign 等設計軟體，具備品牌識別設計、包裝設計、版面編排、行銷宣傳物及視覺企劃等實務能力，同時具備 After Effects 與 Premiere Pro 的基礎製作能力，能應用於動態視覺與數位內容製作。
+                    </p>
+                    <p>
+                      在設計工作中，我重視細節與執行品質，擅長從需求分析、概念發想、風格規劃到設計落實的完整流程，並具備良好的溝通協調能力與團隊合作精神。期望透過專業設計能力與創意思維，協助品牌建立更具影響力的視覺形象，並持續在設計領域精進與成長。
+                    </p>
+                  </div>
 
-                  {/* 核心能力 */}
-                  <section>
-                    <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2">核心能力</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {['品牌識別', '平面設計', '插畫繪製', '介面設計'].map((skill) => (
-                        <span key={skill} className="px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 text-xs bg-gray-50">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </section>
+                  {/* 右側欄：參賽與證照 */}
+                  <div className="space-y-5">
+                    {/* 參賽經歷 */}
+                    <section>
+                      <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2.5 border-b border-gray-100 pb-1 uppercase">參賽 Competition</h3>
+                      <ul className="space-y-2 text-[12px] text-gray-600">
+                        <li className="flex items-start gap-3">
+                          <span className="font-mono font-bold text-gray-400">2025</span>
+                          <span>第11屆國際拍片運動-入選獎</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="font-mono font-bold text-gray-400">2025</span>
+                          <span>第五十屆嵐雲文學獎徵文比賽-文藝評論組-佳作</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="font-mono font-bold text-gray-400">2024</span>
+                          <span>「有蛇有得」生肖圖像設計競賽(大專組)</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="font-mono font-bold text-gray-400">2024</span>
+                          <span>全國旅遊文學明信片創作大賽-17臺南</span>
+                        </li>
+                      </ul>
+                    </section>
+
+                    {/* 證照認證 */}
+                    <section>
+                      <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2.5 border-b border-gray-100 pb-1 uppercase">證照 Certifications</h3>
+                      <ul className="space-y-2 text-[12px] text-gray-600">
+                        <li className="flex items-start gap-3">
+                          <span className="font-mono font-bold text-gray-400">2025</span>
+                          <span>文創品牌行銷企劃師-甲級</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="font-mono font-bold text-gray-400">2025</span>
+                          <span>TQC+ 電腦繪圖設計</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="font-mono font-bold text-gray-400">2023</span>
+                          <span>電腦軟體應用-丙級</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="font-mono font-bold text-gray-400">2022</span>
+                          <span>印前製程圖文組板-乙、丙級</span>
+                        </li>
+                      </ul>
+                    </section>
+                  </div>
+
                 </div>
               </div>
             </motion.div>
