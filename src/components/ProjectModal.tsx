@@ -37,7 +37,7 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-6xl bg-white rounded-2xl shadow-2xl flex flex-col"
+            className="relative w-full max-w-7xl bg-white rounded-2xl shadow-2xl flex flex-col"
             style={{ maxHeight: '90vh' }}
           >
             <button 
@@ -78,7 +78,7 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                     <div className="grid grid-cols-2 gap-8">
                       {project.specs && project.specs.length > 0 && (
                         <section>
-                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">設計規格</h3>
+                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">設計規格 / Specs</h3>
                           <ul className="text-xs space-y-1.5 text-gray-500">
                             {project.specs.map((spec, i) => <li key={i}>{spec}</li>)}
                           </ul>
@@ -86,15 +86,34 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                       )}
                       {project.colorPalette && project.colorPalette.length > 0 && (
                         <section>
-                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">色彩計畫</h3>
+                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">色彩計畫 / Colors</h3>
                           <div className="flex flex-wrap gap-4">
                             {project.colorPalette.map((color, i) => (
-                              <div key={i} className="flex flex-col items-center gap-1.5">
+                               <div key={i} className="flex flex-col items-center gap-1.5">
                                 <div className="w-6 h-6 rounded-full border border-gray-200 shadow-sm" style={{ backgroundColor: color }} title={color} />
                                 <span className="text-[10px] text-gray-500 font-mono uppercase">{color}</span>
                               </div>
                             ))}
                           </div>
+                        </section>
+                      )}
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-8">
+                      {project.process && project.process.length > 0 && (
+                        <section>
+                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">設計流程 / Process</h3>
+                          <ul className="text-xs space-y-1.5 text-gray-500 list-decimal list-inside">
+                            {project.process.map((step, i) => <li key={i}>{step}</li>)}
+                          </ul>
+                        </section>
+                      )}
+                      {project.outcomes && project.outcomes.length > 0 && (
+                        <section>
+                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">最終成果 / Outcomes</h3>
+                          <ul className="text-xs space-y-1.5 text-gray-500 list-disc list-inside">
+                            {project.outcomes.map((outcome, i) => <li key={i}>{outcome}</li>)}
+                          </ul>
                         </section>
                       )}
                     </div>
