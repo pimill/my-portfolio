@@ -58,7 +58,7 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                   />
                 </div>
                 <div className="flex flex-col h-full overflow-y-auto pr-4">
-                  <div className="flex items-center gap-3 mb-5 shrink-0">
+                  <div className="flex items-center gap-3 mb-10 shrink-0">
                     <MushroomIcon className="w-8 h-8 text-[#FF1A23]" />
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                       {project.title}
@@ -66,19 +66,19 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                   </div>
                   <div className="space-y-8 text-sm md:text-base text-gray-700 flex-1">
                     <section>
-                      <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">專案簡介</h3>
+                      <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">專案簡介</h3>
                       <p className="leading-relaxed">{project.description}</p>
                     </section>
                     {project.concept && (
                       <section>
-                        <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">設計概念</h3>
+                        <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">設計概念</h3>
                         <p className="leading-relaxed">{project.concept}</p>
                       </section>
                     )}
                     <div className="grid grid-cols-2 gap-8">
                       {project.specs && project.specs.length > 0 && (
                         <section>
-                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">設計規格</h3>
+                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">設計規格</h3>
                           <ul className="text-xs space-y-1.5 text-gray-500">
                             {project.specs.map((spec, i) => <li key={i}>{spec}</li>)}
                           </ul>
@@ -86,7 +86,7 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                       )}
                       {project.colorPalette && project.colorPalette.length > 0 && (
                         <section>
-                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">色彩計畫</h3>
+                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">色彩計畫</h3>
                           <div className="flex flex-wrap gap-4">
                             {project.colorPalette.map((color, i) => (
                               <div key={i} className="flex flex-col items-center gap-1.5">
@@ -99,13 +99,13 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                       )}
                     </div>
                     
-                    <section className="pt-4 mt-auto">
+                    <section className="pt-6 mt-auto border-t border-gray-100">
                       <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">聯絡</h3>
                       <div className="flex items-center justify-between w-full whitespace-nowrap text-[11px] md:text-xs text-gray-600">
-                        <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">IG @r_yobiii_618</span>
-                        <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">Behance</span>
-                        <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">fpizzayz2@gmail.com</span>
-                        <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">0925-367-291</span>
+                        <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-gray-50">IG @r_yobiii_618</span>
+                        <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-gray-50">Behance</span>
+                        <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-gray-50">fpizzayz2@gmail.com</span>
+                        <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-gray-50">0925-367-291</span>
                       </div>
                     </section>
                   </div>
