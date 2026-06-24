@@ -5,6 +5,9 @@ export interface Project {
   coverImage: string;
   heroImage: string;
   description: string;
+  concept?: string;
+  specs?: string[];
+  colorPalette?: string[];
   process: string[];
   outcomes: string[];
 }
