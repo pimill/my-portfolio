@@ -63,7 +63,7 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, isOpen, onClose }
                   transition={{ delay: 0.2 }}
                 >
                   <img
-                    src={project.image}
+                    src={project.heroImage || project.coverImage}
                     alt={project.title}
                     className="w-full h-auto rounded-lg shadow-lg"
                   />
@@ -89,54 +89,53 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, isOpen, onClose }
                       <p className="text-brand-dark-gray leading-relaxed">{project.description}</p>
                     </section>
 
-                    <section>
-                      <h3 className="text-sm font-bold text-brand-red uppercase tracking-wider mb-2">設計概念</h3>
-                      <p className="text-brand-dark-gray leading-relaxed">{project.concept}</p>
-                    </section>
+                    {project.concept && (
+                      <section>
+                        <h3 className="text-sm font-bold text-brand-red uppercase tracking-wider mb-2">設計概念</h3>
+                        <p className="text-brand-dark-gray leading-relaxed">{project.concept}</p>
+                      </section>
+                    )}
 
                     <div className="grid grid-cols-2 gap-8">
-                      <section>
-                        <h3 className="text-sm font-bold text-brand-red uppercase tracking-wider mb-2">設計規格</h3>
-                        <ul className="text-sm text-brand-dark-gray space-y-1">
-                          <li>尺寸：{project.specs.size}</li>
-                          <li>解析度：{project.specs.resolution}</li>
-                          <li>色彩模式：{project.specs.colorMode}</li>
-                          <li>格式：{project.specs.format}</li>
-                        </ul>
-                      </section>
+                      {project.specs && project.specs.length > 0 && (
+                        <section>
+                          <h3 className="text-sm font-bold text-brand-red uppercase tracking-wider mb-2">設計規格</h3>
+                          <ul className="text-sm text-brand-dark-gray space-y-1">
+                            {project.specs.map((spec, index) => (
+                              <li key={index}>{spec}</li>
+                            ))}
+                          </ul>
+                        </section>
+                      )}
 
-                      <section>
-                        <h3 className="text-sm font-bold text-brand-red uppercase tracking-wider mb-2">色彩計畫</h3>
-                        <div className="flex gap-2">
-                          {project.colors.map((color, index) => (
-                            <div key={index} className="text-center">
-                              <div 
-                                className="w-8 h-8 rounded-full border border-gray-200 mb-1"
-                                style={{ backgroundColor: color }}
-                              />
-                              <span className="text-[10px] text-gray-500 uppercase">{color}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </section>
+                      {project.colorPalette && project.colorPalette.length > 0 && (
+                        <section>
+                          <h3 className="text-sm font-bold text-brand-red uppercase tracking-wider mb-2">色彩計畫</h3>
+                          <div className="flex flex-wrap gap-2">
+                            {project.colorPalette.map((color, index) => (
+                              <div key={index} className="text-center">
+                                <div 
+                                  className="w-8 h-8 rounded-full border border-gray-200 mb-1"
+                                  style={{ backgroundColor: color }}
+                                />
+                                <span className="text-[10px] text-gray-500 uppercase">{color}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </section>
+                      )}
                     </div>
 
-                    <section className="pt-8 border-t border-brand-light-gray">
-                      <h3 className="text-sm font-bold text-brand-red uppercase tracking-wider mb-4">聯絡資訊</h3>
-                      <div className="flex flex-wrap gap-4">
-                        {Object.entries(project.links).map(([key, value]) => (
-                          <a
-                            key={key}
-                            href={key === 'email' ? `mailto:${value}` : value}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-4 py-2 bg-brand-light-gray hover:bg-brand-yellow rounded-full text-xs font-medium transition-colors"
-                          >
-                            {key === 'email' ? value : key.charAt(0).toUpperCase() + key.slice(1)}
-                          </a>
-                        ))}
-                      </div>
-                    </section>
+                    {project.process && (
+                      <section className="pt-8 border-t border-brand-light-gray">
+                        <h3 className="text-sm font-bold text-brand-red uppercase tracking-wider mb-2">製作過程</h3>
+                        <ul className="text-sm text-brand-dark-gray list-disc list-inside space-y-1">
+                          {project.process.map((step, index) => (
+                            <li key={index}>{step}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    )}
                   </div>
                 </motion.div>
               </div>
