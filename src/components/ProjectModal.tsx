@@ -64,29 +64,29 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                       {project.title}
                     </h2>
                   </div>
-                  <div className="space-y-5 text-sm md:text-base text-gray-700 flex-1">
+                  <div className="space-y-8 text-sm md:text-base text-gray-700 flex-1">
                     <section>
-                      <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">專案簡介</h3>
+                      <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">專案簡介</h3>
                       <p className="leading-relaxed">{project.description}</p>
                     </section>
                     {project.concept && (
                       <section>
-                        <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">設計概念</h3>
+                        <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">設計概念</h3>
                         <p className="leading-relaxed">{project.concept}</p>
                       </section>
                     )}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-8">
                       {project.specs && project.specs.length > 0 && (
                         <section>
-                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">設計規格</h3>
-                          <ul className="text-xs space-y-1 text-gray-500">
+                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">設計規格</h3>
+                          <ul className="text-xs space-y-1.5 text-gray-500">
                             {project.specs.map((spec, i) => <li key={i}>{spec}</li>)}
                           </ul>
                         </section>
                       )}
                       {project.colorPalette && project.colorPalette.length > 0 && (
                         <section>
-                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-3">色彩計畫</h3>
+                          <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">色彩計畫</h3>
                           <div className="flex flex-wrap gap-4">
                             {project.colorPalette.map((color, i) => (
                               <div key={i} className="flex flex-col items-center gap-1.5">
@@ -100,8 +100,8 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                     </div>
                     
                     <section className="pt-4 mt-auto">
-                      <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-2">聯絡</h3>
-                      <div className="flex items-center gap-2 flex-nowrap overflow-x-auto pb-1 whitespace-nowrap text-xs text-gray-600 hide-scrollbar">
+                      <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">聯絡</h3>
+                      <div className="flex items-center justify-between w-full whitespace-nowrap text-[11px] md:text-xs text-gray-600">
                         <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">IG @r_yobiii_618</span>
                         <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">Behance</span>
                         <span className="px-3 py-1.5 rounded-full border border-gray-200 bg-white">fpizzayz2@gmail.com</span>
