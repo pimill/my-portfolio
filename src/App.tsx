@@ -2,7 +2,6 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-
 import { useState } from 'react';
 import { Loader } from './components/Loader';
 import { Hero } from './components/Hero';
@@ -15,7 +14,6 @@ import { PastWorks } from './components/PastWorks';
 
 export default function App() {
   const [view, setView] = useState<'home' | 'past-works'>('home');
-
   return (
     <div className="min-h-screen bg-white">
       <Loader />
