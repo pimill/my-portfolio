@@ -1,5 +1,4 @@
 // ProjectModal.tsx
-
 import { FC, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '../types';
@@ -33,13 +32,13 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-[#FF1A23]/50 backdrop-blur-sm cursor-pointer"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
           />
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[85vh] md:h-[75vh]"
+            className="relative w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:h-[85vh] max-h-full"
           >
             <button 
               onClick={onClose} 
@@ -49,23 +48,23 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <div className="flex-1 p-6 md:p-10 overflow-hidden flex flex-col min-h-0">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1 min-h-0">
-                <div className="flex items-center justify-center min-h-0">
+            <div className="flex-1 p-6 md:p-12 h-full overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 h-full">
+                <div className="flex items-center justify-center h-full overflow-hidden pb-4 md:pb-0">
                   <img
                     src={project.heroImage || project.coverImage}
                     alt={project.title}
-                    className="max-w-full max-h-full rounded-lg shadow-sm object-contain"
+                    className="w-full h-full max-h-[40vh] md:max-h-full rounded-lg shadow-sm object-contain"
                   />
                 </div>
-                <div className="flex flex-col min-h-0 overflow-y-auto pr-2 md:pr-4">
+                <div className="flex flex-col h-full overflow-y-auto pr-2 pb-4 md:pb-0">
                   <div className="flex items-center gap-3 mb-6 shrink-0">
                     <MushroomIcon className="w-8 h-8 text-[#FF1A23]" />
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                       {project.title}
                     </h2>
                   </div>
-                  <div className="space-y-6 text-sm md:text-base text-gray-700">
+                  <div className="space-y-6 text-sm md:text-base text-gray-700 flex-1">
                     <section>
                       <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-2">專案簡介</h3>
                       <p className="leading-relaxed">{project.description}</p>
@@ -95,6 +94,16 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                           </div>
                         </section>
                       )}
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-gray-100 shrink-0">
+                    <h3 className="text-[#FF1A23] font-bold text-xs uppercase tracking-widest mb-4">聯絡</h3>
+                    <div className="flex flex-wrap gap-3">
+                      <span className="px-4 py-2 rounded-full border border-gray-200 text-xs text-gray-600">IG @r_yobiii_618</span>
+                      <span className="px-4 py-2 rounded-full border border-gray-200 text-xs text-gray-600">Behance</span>
+                      <span className="px-4 py-2 rounded-full border border-gray-200 text-xs text-gray-600">fpizzayz2@gmail.com</span>
+                      <span className="px-4 py-2 rounded-full border border-gray-200 text-xs text-gray-600">0925-367-291</span>
                     </div>
                   </div>
                 </div>
