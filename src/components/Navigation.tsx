@@ -48,7 +48,6 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
         }
       >
         <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-          {/* Logo — 點擊回頂部 */}
           <a
             href="#hero"
             onClick={(e) => {
@@ -68,7 +67,6 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
             </span>
           </a>
 
-          {/* 導覽連結 */}
           <ul className="flex gap-8">
             {links.map((link) => (
               <li key={link.name} className="relative group">
@@ -87,7 +85,6 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                 >
                   {link.name}
                 </a>
-                {/* Mushroom stem underline */}
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-1 bg-current transition-all duration-300 rounded-full group-hover:w-full opacity-0 group-hover:opacity-100" />
               </li>
             ))}
@@ -95,11 +92,9 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
         </div>
       </motion.nav>
 
-      {/* 關於我彈出視窗 */}
       <AnimatePresence>
         {isAboutOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* 背景灰色遮罩 */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -108,14 +103,12 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
               className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
             />
             
-            {/* 視窗本體 - 放大寬度至最大 1050px 以容納左右分欄 */}
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 10 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
               className="relative w-full max-w-[1050px] bg-white rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden text-slate-800"
             >
-              {/* 右上角關閉按鈕 */}
               <button 
                 onClick={() => setIsAboutOpen(false)} 
                 className="absolute top-4 right-4 z-50 p-2 text-gray-400 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors bg-white/80"
@@ -125,11 +118,9 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                 </svg>
               </button>
 
-              {/* 左側頭像設計：帶有禁止符號的蘑菇 (404無此圖片意象) */}
               <div className="w-full md:w-[25%] bg-gray-50 flex flex-col items-center justify-center p-6 border-r border-gray-100 min-h-[220px]">
                 <div className="relative flex items-center justify-center mb-3">
                   <MushroomIcon className="w-20 h-20 text-gray-200" />
-                  {/* 絕對定位的禁止符號疊加層 */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-20 h-20 border-[5px] border-gray-400/60 rounded-full relative flex items-center justify-center">
                       <div className="absolute w-[5px] h-16 bg-gray-400/60 rotate-45 rounded-full" />
@@ -139,9 +130,7 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                 <span className="text-gray-400 text-[10px] tracking-widest uppercase font-mono font-bold">IMAGE NOT FOUND / 404</span>
               </div>
 
-              {/* 右側區塊：滿版內容與左右分欄 */}
               <div className="w-full md:w-[75%] flex flex-col p-6 md:p-8 justify-center text-left">
-                {/* 標題改為：關於我 */}
                 <div className="flex items-center gap-3 mb-5 border-b border-gray-100 pb-3">
                   <MushroomIcon className="w-7 h-7 text-[#FF1A23]" />
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-wide">
@@ -149,10 +138,7 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                   </h2>
                 </div>
 
-                {/* 內文左右分欄架構 */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-                  
-                  {/* 左側欄：個人介紹 */}
                   <div className="space-y-4 text-[12px] md:text-[13px] leading-relaxed text-gray-600 font-sans">
                     <p>
                       我是曾琬茹，畢業於崑山科技大學視覺傳達設計系，專注於品牌識別、平面設計與視覺整合設計。擅長透過設計思考將品牌理念轉化為具辨識度與一致性的視覺形象，並重視設計在溝通與商業應用上的價值。
@@ -161,13 +147,11 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                       熟悉 Adobe Illustrator、Photoshop、InDesign 等設計軟體，具備品牌識別設計、包裝設計、版面編排、行銷宣傳物及視覺企劃等實務能力，同時具備 After Effects 與 Premiere Pro 的基礎製作能力，能應用於動態視覺與數位內容製作。
                     </p>
                     <p>
-                      重視細節與執行品質，擅長從需求分析、概念發想、風格規劃到設計落實的完整流程，並具備良好的溝通協調能力與團隊合作精神。期望透過專業設計能力與創意思維，協助品牌建立更具影響力的視覺形象，並持續在設計領域精進與成長。
+                      重視細節與品質，擅長從概念發想、風格規劃到設計落實的完整流程，並具備良好的溝通協調能力與團隊合作精神。期望透過專業設計能力與創意思維，協助品牌建立更具影響力的視覺形象，並持續在設計領域精進與成長。
                     </p>
                   </div>
 
-                  {/* 右側欄：參賽與證照 */}
                   <div className="space-y-5">
-                    {/* 參賽經歷 */}
                     <section>
                       <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2.5 border-b border-gray-100 pb-1 uppercase">參賽 Competition</h3>
                       <ul className="space-y-2 text-[12px] text-gray-600">
@@ -190,7 +174,6 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                       </ul>
                     </section>
 
-                    {/* 證照認證 */}
                     <section>
                       <h3 className="text-[#FF1A23] font-bold text-[11px] tracking-widest mb-2.5 border-b border-gray-100 pb-1 uppercase">證照 Certifications</h3>
                       <ul className="space-y-2 text-[12px] text-gray-600">
@@ -213,7 +196,6 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                       </ul>
                     </section>
                   </div>
-
                 </div>
               </div>
             </motion.div>
