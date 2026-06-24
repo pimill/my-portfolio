@@ -1,4 +1,3 @@
-// Works.tsx
 import { motion } from 'motion/react';
 import { projects } from '../data/projects';
 import { useState } from 'react';
