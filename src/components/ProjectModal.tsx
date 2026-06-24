@@ -1,3 +1,5 @@
+// ProjectModal.tsx
+
 import { FC, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Project } from '../types';
@@ -25,19 +27,19 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-[#FF1A23]/60 backdrop-blur-md cursor-pointer"
+            className="absolute inset-0 bg-[#FF1A23]/50 backdrop-blur-sm cursor-pointer"
           />
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh]"
+            className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[85vh] md:h-[75vh]"
           >
             <button 
               onClick={onClose} 
@@ -47,17 +49,17 @@ export const ProjectModal: FC<ProjectModalProps> = ({ project, onClose }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <div className="flex-1 overflow-y-auto p-6 md:p-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div className="flex items-start justify-center">
+            <div className="flex-1 p-6 md:p-10 overflow-hidden flex flex-col min-h-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1 min-h-0">
+                <div className="flex items-center justify-center min-h-0">
                   <img
                     src={project.heroImage || project.coverImage}
                     alt={project.title}
-                    className="w-full h-auto rounded-lg shadow-sm object-contain"
+                    className="max-w-full max-h-full rounded-lg shadow-sm object-contain"
                   />
                 </div>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-3 mb-6">
+                <div className="flex flex-col min-h-0 overflow-y-auto pr-2 md:pr-4">
+                  <div className="flex items-center gap-3 mb-6 shrink-0">
                     <MushroomIcon className="w-8 h-8 text-[#FF1A23]" />
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                       {project.title}
