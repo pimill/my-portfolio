@@ -1,3 +1,4 @@
+```tsx
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MushroomIcon } from './MushroomIcon';
@@ -159,7 +160,7 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                       熟悉 Adobe Illustrator、Photoshop、InDesign 等設計軟體，具備品牌識別設計、包裝設計、版面編排、行銷宣傳物及視覺企劃等實務能力，同時具備 After Effects 與 Premiere Pro 的基礎製作能力，能應用於動態視覺與數位內容製作。
                     </p>
                     <p>
-                      在設計工作中，我重視細節與執行品質，擅長從需求分析、概念發想、風格規劃到設計落實的完整流程，並具備良好的溝通協調能力與團隊合作精神。期望透過專業設計能力與創意思維，協助品牌建立更具影響力的視覺形象，並持續在設計領域精進與成長。
+                      重視細節與執行品質，擅長從需求分析、概念發想、風格規劃到設計落實的完整流程，並具備良好的溝通協調能力與團隊合作精神。期望透過專業設計能力與創意思維，協助品牌建立更具影響力的視覺形象，並持續在設計領域精進與成長。
                     </p>
                   </div>
 
@@ -221,3 +222,5 @@ export const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
     </>
   );
 };
+
+```
